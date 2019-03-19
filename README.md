@@ -1,4 +1,4 @@
-# Basic brain MRI Segmentation
+# Simple brain MRI Segmentation
 This script shows how to process an axial brain MRI image to perform skull stripping and segmentation of the brain.
 
 The skull stripping is performed through:
