@@ -53,6 +53,10 @@ kernel = np.ones((5, 5), np.uint8)
 erosion = cv2.erode(binarized,kernel,iterations = 1)
 masking(erosion)
 
+bentuk = np.ones((5, 5), np.uint8)
+opening = cv2.morphologyEx(erosion, cv2.MORPH_OPEN, bentuk)
+masking(opening)
+
 # closing
 kernel = np.ones((5, 5), np.uint8)
 closing = cv2.morphologyEx(erosion, cv2.MORPH_CLOSE, kernel)
@@ -61,7 +65,7 @@ masking(closing)
 
 # dilasi
 shape = np.ones((5, 5), np.uint8)
-dilation_open = cv2.dilate(closing,shape,iterations = 1)
+dilation_open = cv2.dilate(opening,shape,iterations = 1)
 
 foreground_value = 255
 mask = np.uint8(dilation_open == foreground_value)
@@ -110,8 +114,8 @@ segmented_image[dilation_open == foreground_value] = labels
 
 
 # Display
-captions = ["1. Original image", "2. Thresholding",
-            "3. Largest connected component + Mathematical morphology",
+captions = ["1. Original image", "2. Thresholding + Masking",
+            "3. Morphology",
             "4. Segmented image"]
 horizontal_layout = np.hstack(
     (hasil, binarized, dilation_open, segmented_image))
