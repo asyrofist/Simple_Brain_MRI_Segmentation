@@ -7,11 +7,12 @@ import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
 
-option = st.selectbox('Pilih File Dicom?',['dicom/'])
-st.sidebar.write('You selected:', option)
+
+option = st.selectbox('Pilih File Dicom?',['dicom'])
+d = pydicom.read_file(option)
+st.sidebar.write('You selected:', d)
 if bukadata:
     # get the data
-    d = pydicom.read_file(option)
     file = np.array(d.pixel_array)
     img = file
     img_2d = img.astype(float)
