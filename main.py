@@ -7,36 +7,17 @@ import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
 
-# # def ShowImage(title,img,ctype):
-# #   plt.figure(figsize=(9, 9))
-# #   if ctype=='gray':
-# #     plt.imshow(img,cmap='gray')
-# #   elif ctype=='rgb':
-# #     plt.imshow(img)
-# #   else:
-# #     raise Exception("Unknown colour type")
-# #   plt.axis('off')
-# #   plt.title(title)
-# #   plt.show()
-
-# def masking(image):
-#     foreground_value = 255
-#     mask = np.uint8(image == foreground_value)
-#     labels, stats = cv.connectedComponentsWithStats(mask, 4)[1:3]
-#     largest_label = 1 + np.argmax(stats[1:, cv.CC_STAT_AREA])
-#     image = np.zeros_like(image)
-#     image[labels == largest_label] = foreground_value
-#     ShowImage('masking',image,'rgb')
-
-# get the data
-d = pydicom.read_file("dicom/Z108")
-file = np.array(d.pixel_array)
-img = file
-img_2d = img.astype(float)
-img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
-img_2d_scaled = np.uint8(img_2d_scaled)
-hasil = img_2d_scaled
-st.image(hasil, caption='Gambar Origin',use_column_width=True)
+ambildata = st.sidebar.checkbox('ambil data')
+if ambildata:
+  # get the data
+  d = pydicom.read_file("dicom/Z108")
+  file = np.array(d.pixel_array)
+  img = file
+  img_2d = img.astype(float)
+  img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
+  img_2d_scaled = np.uint8(img_2d_scaled)
+  hasil = img_2d_scaled
+  st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
 
 # #OTSU THRESHOLDING
