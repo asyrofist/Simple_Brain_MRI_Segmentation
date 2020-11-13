@@ -3,7 +3,7 @@ Berikut ini adalah beberapa update terbaru dari source code sebelumnya dengan pe
 
 Cerebellum and Frontal Lobe Segmentation Based on K-Means Clustering and Morphological Transformation described in [our paper at iSemantic2020](https://ieeexplore.ieee.org/document/9234262). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [website](http://rakha.asyrofi.com/), so I could survey what kind of tasks the tool is used for. 
 ```
-@inproceedings{putra-etal-2020-tiara,
+@inproceedings{rakha-asyrofi-2020-brainsegmentation,
     title = "Cerebellum and Frontal Lobe Segmentation Based on K-Means Clustering and Morphological Transformation",
     author = "Asyrofi, Rakha  and
       Winata, Yoni Azhar  and
