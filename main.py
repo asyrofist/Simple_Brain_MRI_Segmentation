@@ -1,35 +1,31 @@
 import streamlit as st
 import numpy as np
 import os 
-from cv2 import threshold, THRESH_BINARY, THRESH_OTSU, connectedComponentsWithStats
+import cv2
 import pydicom
 import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
 
-ambildata = st.sidebar.checkbox('ambil data')
-thresholddata = st.sidebar.checkbox('threshold data')
-if ambildata:
-  # get the data
-  d = pydicom.read_file("dicom/Z108")
-  file = np.array(d.pixel_array)
-  img = file
-  img_2d = img.astype(float)
-  img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
-  img_2d_scaled = np.uint8(img_2d_scaled)
-  hasil = img_2d_scaled
-  st.image(hasil, caption='Gambar Origin',use_column_width=True)
+# get the data
+d = pydicom.read_file("dicom/Z108")
+file = np.array(d.pixel_array)
+img = file
+img_2d = img.astype(float)
+img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
+img_2d_scaled = np.uint8(img_2d_scaled)
+hasil = img_2d_scaled
+st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
-elif thresholddata:
-  #OTSU THRESHOLDING
-  _,binarized = threshold(hasil, 0, 255, THRESH_BINARY + THRESH_OTSU)
-  foreground_value = 255
-  mask = np.uint8(binarized == foreground_value)
-  labels, stats = connectedComponentsWithStats(mask, 4)[1:3]
-  largest_label = 1 + np.argmax(stats[1:, CC_STAT_AREA])
-  binarized = np.zeros_like(binarized)
-  binarized[labels == largest_label] = foreground_value
-  st.image(binarized, caption='Otsu Image',use_column_width=True)
+#OTSU THRESHOLDING
+_,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+foreground_value = 255
+mask = np.uint8(binarized == foreground_value)
+labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+binarized = np.zeros_like(binarized)
+binarized[labels == largest_label] = foreground_value
+st.image(binarized, caption='Otsu Image',use_column_width=True)
 
 # # erosion from otsu
 # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
