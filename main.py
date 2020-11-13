@@ -1,3 +1,4 @@
+import streamlit as st
 import numpy as np
 import os 
 import cv2
@@ -5,7 +6,6 @@ import pydicom
 import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
-import streamlit as st
 
 # # def ShowImage(title,img,ctype):
 # #   plt.figure(figsize=(9, 9))
