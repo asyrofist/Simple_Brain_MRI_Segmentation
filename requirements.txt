@@ -1,1 +1,1 @@
-opencv-python #cv2
+opencv-python #cv
