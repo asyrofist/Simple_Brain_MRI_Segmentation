@@ -47,7 +47,6 @@ labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
 largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
 dilasi = np.zeros_like(dilasi)
 dilasi[labels == largest_label] = foreground_value
-ShowImage('dilasi_akhir',dilasi,'rgb')
 st.image(dilasi, caption='Dilation Image',use_column_width=True)
 
 img_2d = file.astype(float)
