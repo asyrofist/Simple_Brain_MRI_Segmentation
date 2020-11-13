@@ -7,17 +7,17 @@ import skimage.segmentation as seg
 from PIL import Image
 import streamlit as st
 
-def ShowImage(title,img,ctype):
-  plt.figure(figsize=(9, 9))
-  if ctype=='gray':
-    plt.imshow(img,cmap='gray')
-  elif ctype=='rgb':
-    plt.imshow(img)
-  else:
-    raise Exception("Unknown colour type")
-  plt.axis('off')
-  plt.title(title)
-  plt.show()
+# def ShowImage(title,img,ctype):
+#   plt.figure(figsize=(9, 9))
+#   if ctype=='gray':
+#     plt.imshow(img,cmap='gray')
+#   elif ctype=='rgb':
+#     plt.imshow(img)
+#   else:
+#     raise Exception("Unknown colour type")
+#   plt.axis('off')
+#   plt.title(title)
+#   plt.show()
 
 def masking(image):
     foreground_value = 255
