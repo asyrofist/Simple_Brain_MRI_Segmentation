@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import os 
-import cv2
+# import cv2
 import pydicom
 import matplotlib.pyplot as plt
 import skimage.segmentation as seg
