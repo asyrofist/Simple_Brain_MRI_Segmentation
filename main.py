@@ -10,7 +10,7 @@ from PIL import Image
 bukadata        = st.sidebar.checkbox('Buka File')
 thresholddata   = st.sidebar.checkbox('Threshold File')
 erosiondata     = st.sidebar.checkbox('Erosion File')
-dilationdata:   = st.sidebar.checkbox('Dilation File')
+dilationdata    = st.sidebar.checkbox('Dilation File')
 clusterdata     = st.sidebar.checkbox('Cluster File')
     
 if bukadata:
