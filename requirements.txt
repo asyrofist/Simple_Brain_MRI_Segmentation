@@ -1,4 +1,5 @@
 numpy
+opencv-python
 opencv-contrib-python
 pydicom
 matplotlib
