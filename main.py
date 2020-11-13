@@ -28,15 +28,15 @@ from PIL import Image
 #     image[labels == largest_label] = foreground_value
 #     ShowImage('masking',image,'rgb')
 
-# # get the data
-# d = pydicom.read_file("dicom/Z108")
-# file = np.array(d.pixel_array)
-# img = file
-# img_2d = img.astype(float)
-# img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
-# img_2d_scaled = np.uint8(img_2d_scaled)
-# hasil = img_2d_scaled
-# st.image(hasil, caption='Gambar Origin',use_column_width=True)
+# get the data
+d = pydicom.read_file("dicom/Z108")
+file = np.array(d.pixel_array)
+img = file
+img_2d = img.astype(float)
+img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
+img_2d_scaled = np.uint8(img_2d_scaled)
+hasil = img_2d_scaled
+st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
 
 # #OTSU THRESHOLDING
