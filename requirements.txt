@@ -1,2 +1,7 @@
+numpy
+opencv-contrib-python
+pydicom
+matplotlib
+scikit-image
+Pillow
 streamlit
-opencv-python #cv
