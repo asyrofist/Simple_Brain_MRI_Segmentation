@@ -29,7 +29,7 @@ def masking(image):
     ShowImage('masking',image,'rgb')
 
 # get the data
-basepath ="/content/cloned-dicom/dicom/"
+basepath ="dicom/"
 d = pydicom.read_file(basepath + "Z108")
 file = np.array(d.pixel_array)
 img = file
