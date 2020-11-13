@@ -44,7 +44,7 @@ dilasi = cv2.dilate(erosion,kernel,iterations = 2)
 foreground_value = 255
 mask = np.uint8(dilasi == foreground_value)
 labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
-largest_label = 1 + np.argmax(stats[1:, cv.CC_STAT_AREA])
+largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
 dilasi = np.zeros_like(dilasi)
 dilasi[labels == largest_label] = foreground_value
 ShowImage('dilasi_akhir',dilasi,'rgb')
