@@ -59,7 +59,7 @@ elif dilationdata:
     dilasi[labels == largest_label] = foreground_value
     st.image(dilasi, caption='Dilation Image',use_column_width=True)
 
- elif clusterdata:
+elif clusterdata:
     img_2d = file.astype(float)
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
     img_2d_scaled = np.uint8(img_2d_scaled)
