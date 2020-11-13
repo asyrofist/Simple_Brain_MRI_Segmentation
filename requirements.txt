@@ -1,2 +1,2 @@
-opencv-python
+opencv-python #cv2
 streamlit>0.66
