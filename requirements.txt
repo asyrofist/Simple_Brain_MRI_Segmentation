@@ -1,1 +1,1 @@
-cv2>=0
+opencv-python # cv2
