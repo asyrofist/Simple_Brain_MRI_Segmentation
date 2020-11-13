@@ -1,9 +1,7 @@
 import numpy as np
-import cv2
+import os, cv2, pydicom
 import matplotlib.pyplot as plt
 import skimage.segmentation as seg
-import pydicom
-import os
 from PIL import Image
 import streamlit as st
 
