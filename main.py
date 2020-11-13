@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
 
-IMAGE_PATHS = os.listdir("dicom/")
-option = st.selectbox('Pilih File Dicom?',[IMAGE_PATHS])
+IMAGE_PATHS = os.listdir("dicom")
+option = st.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 # d = pydicom.read_file(IMAGE_PATHS)
 # st.sidebar.write('You selected:', d)
 # if bukadata:
