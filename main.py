@@ -1,6 +1,6 @@
 import numpy as np
 import os 
-import cv2
+import cv2 as cv
 import pydicom
 import matplotlib.pyplot as plt
 import skimage.segmentation as seg
@@ -41,7 +41,7 @@ st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
 
 #OTSU THRESHOLDING
-_,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+_,binarized = cv.threshold(hasil, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
 foreground_value = 255
 mask = np.uint8(binarized == foreground_value)
 labels, stats = cv.connectedComponentsWithStats(mask, 4)[1:3]
@@ -51,7 +51,7 @@ binarized[labels == largest_label] = foreground_value
 st.image(binarized, caption='Otsu Image',use_column_width=True)
 
 # erosion from otsu
-kernel = cv.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE,(3,3))
 erosion = cv.erode(binarized,kernel,iterations = 4)
 foreground_value = 255
 mask = np.uint8(erosion == foreground_value)
@@ -62,12 +62,12 @@ erosion[labels == largest_label] = foreground_value
 st.image(erosion, caption='Erosion Image',use_column_width=True)
 
 # dilation from opening
-kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-dilasi = cv2.dilate(erosion,kernel,iterations = 2)
+kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE,(3,3))
+dilasi = cv.dilate(erosion,kernel,iterations = 2)
 foreground_value = 255
 mask = np.uint8(dilasi == foreground_value)
 labels, stats = cv.connectedComponentsWithStats(mask, 4)[1:3]
-largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+largest_label = 1 + np.argmax(stats[1:, cv.CC_STAT_AREA])
 dilasi = np.zeros_like(dilasi)
 dilasi[labels == largest_label] = foreground_value
 ShowImage('dilasi_akhir',dilasi,'rgb')
@@ -79,7 +79,7 @@ img_2d_scaled = np.uint8(img_2d_scaled)
 hasil = img_2d_scaled
 
 #Skull Stripping
-skull_stripped_image = cv2.bitwise_and(hasil, hasil, mask = dilasi)
+skull_stripped_image = cv.bitwise_and(hasil, hasil, mask = dilasi)
 brain_pixels = skull_stripped_image[dilasi == foreground_value]
 
 # Adapting the data to K-means
@@ -90,10 +90,10 @@ epsilon = 0.01
 number_of_iterations = 50
 number_of_clusters = 4
 number_of_repetition = 10
-criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER,number_of_iterations, epsilon)
-flags = cv2.KMEANS_RANDOM_CENTERS
+criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER,number_of_iterations, epsilon)
+flags = cv.KMEANS_RANDOM_CENTERS
 # K-means segmentation
-_, labels, centers = cv2.kmeans(kmeans_input, number_of_clusters, None, criteria,number_of_repetition, flags)
+_, labels, centers = cv.kmeans(kmeans_input, number_of_clusters, None, criteria,number_of_repetition, flags)
 # Adapting the labels
 labels = labels.flatten('F')
 for x in range(number_of_clusters):
