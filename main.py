@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import os 
-import cv2
+from cv2 import threshold, THRESH_BINARY, THRESH_OTSU, connectedComponentsWithStats
 import pydicom
 import matplotlib.pyplot as plt
 import skimage.segmentation as seg
@@ -20,14 +20,13 @@ if ambildata:
   hasil = img_2d_scaled
   st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
-
 elif thresholddata:
   #OTSU THRESHOLDING
-  _,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+  _,binarized = threshold(hasil, 0, 255, THRESH_BINARY + THRESH_OTSU)
   foreground_value = 255
   mask = np.uint8(binarized == foreground_value)
-  labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
-  largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+  labels, stats = connectedComponentsWithStats(mask, 4)[1:3]
+  largest_label = 1 + np.argmax(stats[1:, CC_STAT_AREA])
   binarized = np.zeros_like(binarized)
   binarized[labels == largest_label] = foreground_value
   st.image(binarized, caption='Otsu Image',use_column_width=True)
