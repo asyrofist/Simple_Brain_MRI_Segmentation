@@ -8,6 +8,7 @@ import skimage.segmentation as seg
 from PIL import Image
 
 ambildata = st.sidebar.checkbox('ambil data')
+thresholddata = st.sidebar.checkbox('threshold data')
 if ambildata:
   # get the data
   d = pydicom.read_file("dicom/Z108")
@@ -20,15 +21,16 @@ if ambildata:
   st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
 
-# #OTSU THRESHOLDING
-# _,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-# foreground_value = 255
-# mask = np.uint8(binarized == foreground_value)
-# labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
-# largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
-# binarized = np.zeros_like(binarized)
-# binarized[labels == largest_label] = foreground_value
-# st.image(binarized, caption='Otsu Image',use_column_width=True)
+elif threshodldata:;
+  #OTSU THRESHOLDING
+  _,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+  foreground_value = 255
+  mask = np.uint8(binarized == foreground_value)
+  labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+  largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+  binarized = np.zeros_like(binarized)
+  binarized[labels == largest_label] = foreground_value
+  st.image(binarized, caption='Otsu Image',use_column_width=True)
 
 # # erosion from otsu
 # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
