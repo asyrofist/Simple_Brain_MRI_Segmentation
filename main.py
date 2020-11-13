@@ -1,6 +1,6 @@
 import numpy as np
 import os 
-import cv2 as cv
+import cv2
 import pydicom
 import matplotlib.pyplot as plt
 import skimage.segmentation as seg
@@ -22,7 +22,7 @@ def ShowImage(title,img,ctype):
 def masking(image):
     foreground_value = 255
     mask = np.uint8(image == foreground_value)
-    labels, stats = cv.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv.CC_STAT_AREA])
     image = np.zeros_like(image)
     image[labels == largest_label] = foreground_value
@@ -41,17 +41,17 @@ st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
 
 #OTSU THRESHOLDING
-_,binarized = cv.threshold(hasil, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
+_,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 foreground_value = 255
 mask = np.uint8(binarized == foreground_value)
 labels, stats = cv.connectedComponentsWithStats(mask, 4)[1:3]
-largest_label = 1 + np.argmax(stats[1:, cv.CC_STAT_AREA])
+largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
 binarized = np.zeros_like(binarized)
 binarized[labels == largest_label] = foreground_value
 st.image(binarized, caption='Otsu Image',use_column_width=True)
 
 # erosion from otsu
-kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE,(3,3))
+kernel = cv.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
 erosion = cv.erode(binarized,kernel,iterations = 4)
 foreground_value = 255
 mask = np.uint8(erosion == foreground_value)
@@ -62,8 +62,8 @@ erosion[labels == largest_label] = foreground_value
 st.image(erosion, caption='Erosion Image',use_column_width=True)
 
 # dilation from opening
-kernel = cv.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-dilasi = cv.dilate(erosion,kernel,iterations = 2)
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+dilasi = cv2.dilate(erosion,kernel,iterations = 2)
 foreground_value = 255
 mask = np.uint8(dilasi == foreground_value)
 labels, stats = cv.connectedComponentsWithStats(mask, 4)[1:3]
