@@ -68,7 +68,7 @@ number_of_iterations = 50
 number_of_clusters = 4
 number_of_repetition = 10
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER,number_of_iterations, epsilon)
-flags = cv.KMEANS_RANDOM_CENTERS
+flags = cv2.KMEANS_RANDOM_CENTERS
 # K-means segmentation
 _, labels, centers = cv2.kmeans(kmeans_input, number_of_clusters, None, criteria,number_of_repetition, flags)
 # Adapting the labels
