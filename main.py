@@ -7,15 +7,11 @@ import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
 
-bukadata        = st.sidebar.checkbox('Buka File')
-thresholddata   = st.sidebar.checkbox('Threshold File')
-erosiondata     = st.sidebar.checkbox('Erosion File')
-dilationdata    = st.sidebar.checkbox('Dilation File')
-clusterdata     = st.sidebar.checkbox('Cluster File')
-    
+option = st.selectbox('Pilih File Dicom?',['dicom/'])
+st.sidebar.write('You selected:', option)
 if bukadata:
     # get the data
-    d = pydicom.read_file("dicom/Z108")
+    d = pydicom.read_file(option)
     file = np.array(d.pixel_array)
     img = file
     img_2d = img.astype(float)
@@ -24,7 +20,6 @@ if bukadata:
     hasil = img_2d_scaled
     st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
-elif thresholddata:
     #OTSU THRESHOLDING
     _,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     foreground_value = 255
@@ -35,7 +30,6 @@ elif thresholddata:
     binarized[labels == largest_label] = foreground_value
     st.image(binarized, caption='Otsu Image',use_column_width=True)
 
-elif erosiondata:
     # erosion from otsu
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     erosion = cv2.erode(binarized,kernel,iterations = 4)
@@ -47,7 +41,6 @@ elif erosiondata:
     erosion[labels == largest_label] = foreground_value
     st.image(erosion, caption='Erosion Image',use_column_width=True)
 
-elif dilationdata:
     # dilation from opening
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     dilasi = cv2.dilate(erosion,kernel,iterations = 2)
@@ -59,7 +52,6 @@ elif dilationdata:
     dilasi[labels == largest_label] = foreground_value
     st.image(dilasi, caption='Dilation Image',use_column_width=True)
 
-elif clusterdata:
     img_2d = file.astype(float)
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
     img_2d_scaled = np.uint8(img_2d_scaled)
