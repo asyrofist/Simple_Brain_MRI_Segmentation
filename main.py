@@ -79,6 +79,19 @@ def opening(image):
     st.image(opening, caption='Opening Image')
     return opening
 
+def closing(image):
+    kernel = np.ones((5, 5), np.uint8)
+    # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    closing = cv2.morphologyEx(erosion, cv2.MORPH_CLOSE, kernel, iterations= 2)
+    foreground_value = 255
+    mask_closing = np.uint8(closing >= foreground_value)
+    labels, stats = cv2.connectedComponentsWithStats(mask_closing, 4)[1:3]
+    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    close = np.zeros_like(closing)
+    close[labels == largest_label] = foreground_value
+    st.image(close, caption='Closing Image')
+    return close
+
 def dilation(image):
     # dilation from opening
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
