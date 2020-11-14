@@ -26,7 +26,7 @@ if allinone:
         img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
         img_2d_scaled = np.uint8(img_2d_scaled)
         hasil = img_2d_scaled
-        st.image(hasil, caption='Gambar Origin',use_column_width=True)
+        st.image(hasil, caption='Gambar Origin')
 
 columns = 6
 rows = 7
