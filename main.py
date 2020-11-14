@@ -133,7 +133,8 @@ def cluster(image, dilasi, foreground_value):
     return segmented_image
 
 def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):  
-    hasil_image = image
+    segmented_image = image
+    hasil_image = segmented_image
     for x in range(256):
         for y in range(256):
             if segmented_image[x][y] == 0:
