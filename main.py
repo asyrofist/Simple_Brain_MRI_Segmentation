@@ -132,10 +132,10 @@ def cluster(image, dilasi, foreground_value):
     st.image(segmented_image, caption='Segmented Image')
     return segmented_image
 
-morphology1 = st.sidebar.checkbox('Morphology1 (Otsu-Erosion-Dilation)')
-morphology2 = st.sidebar.checkbox('Morphology2 (Gaussian-Erosion-Dilation)')
-morphology3 = st.sidebar.checkbox('Improvement Morphology1 (Otsu-Erosion-Opening-Dilation)')
-morphology4 = st.sidebar.checkbox('Improvement Morphology2 (Gaussian-Erosion-Closing-Dilation)')
+morphology1 = st.sidebar.button('Morphology1 (Otsu-Erosion-Dilation)')
+morphology2 = st.sidebar.button('Morphology2 (Gaussian-Erosion-Dilation)')
+morphology3 = st.sidebar.button('Improvement Morphology1 (Otsu-Erosion-Opening-Dilation)')
+morphology4 = st.sidebar.button('Improvement Morphology2 (Gaussian-Erosion-Closing-Dilation)')
 
 if morphology1:
     a = bukadata(option)
@@ -163,6 +163,6 @@ elif morphology4:
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
-    d = closing(c)
+    d = opening(c)
     e = dilation(d)
     cluster(a, e, 255)
