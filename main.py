@@ -30,7 +30,11 @@ if bukadata:
     
 elif otsuthreshold:
     #OTSU THRESHOLDING
-    _,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    img = file
+    img_2d = img.astype(float)
+    img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
+    img_2d_scaled = np.uint8(img_2d_scaled)
+    _,binarized = cv2.threshold(img_2d_scaled, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     foreground_value = 255
     mask = np.uint8(binarized == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
