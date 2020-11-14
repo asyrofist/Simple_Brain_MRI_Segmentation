@@ -9,7 +9,7 @@ from PIL import Image
 
 IMAGE_PATHS = os.listdir("dicom")
 option = st.selectbox('Pilih File Dicom?',IMAGE_PATHS)
-st.sidebar.write('You selected:', d)
+st.sidebar.write('You selected:', option)
 if bukadata:
     # get the data
     d = pydicom.read_file(option)
