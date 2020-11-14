@@ -17,7 +17,7 @@ option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
 foreground = st.sidebar.slider('Berapa Foreground?', 0, 128, 255)
-nilai_threshold = st.sidebar.slider('Berapa Threshold?', 0, 255, 155)
+nilai_threshold = st.sidebar.slider('Berapa Threshold?', 140, 161, 155)
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
 ukuran = st.sidebar.slider('Berapa ukuran?', 0, 10, 4)
 start_ukuran, end_ukuran = st.sidebar.select_slider(
