@@ -161,7 +161,7 @@ elif morphology3:
     
 elif morphology4:
     a = bukadata(option)
-    b = otsuthreshold(a)
+    b = gaussianthreshold(a)
     c = erosion(b)
     d = closing(c)
     e = dilation(d)
