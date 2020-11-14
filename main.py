@@ -39,7 +39,7 @@ def bukadata(file):
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground
     img_2d_scaled = np.uint8(img_2d_scaled)
     hasil = img_2d_scaled
-    st.image(hasil, caption='Gambar Origin')
+    st.image(hasil, caption='Gambar Origin', use_column_width=True)
     return hasil
 
 def otsuthreshold(image):
