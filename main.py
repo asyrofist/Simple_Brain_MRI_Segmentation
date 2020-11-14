@@ -30,7 +30,7 @@ if allinone:
 columns = 6
 rows = 7
 for i in range(1, columns*rows +1):
-    st.image(hasil, width=rows, use_column_width=False)
+    st.image(hasil, width=columns*rows +1)
 
 # morphology = st.sidebar.checkbox('Morphology1')
 # if morphology:
