@@ -74,7 +74,7 @@ def erosion(image):
     foreground_value = foreground
     mask = np.uint8(erosion == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
-    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     erosion = np.zeros_like(erosion)
     erosion[labels == largest_label] = foreground_value
     st.image(erosion, caption='Erosion Image')
@@ -86,7 +86,7 @@ def opening(image):
     foreground_value = foreground
     mask = np.uint8(opening == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
-    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     opening = np.zeros_like(opening)
     opening[labels == largest_label] = foreground_value
     st.image(opening, caption='Opening Image')
@@ -98,7 +98,7 @@ def closing(image):
     foreground_value = foreground
     mask_closing = np.uint8(closing >= foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask_closing, ukuran)[start_ukuran:end_ukuran]
-    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     close = np.zeros_like(closing)
     close[labels == largest_label] = foreground_value
     st.image(close, caption='Closing Image')
@@ -111,7 +111,7 @@ def dilation(image):
     foreground_value = foreground
     mask = np.uint8(dilasi == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
-    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     dilasi = np.zeros_like(dilasi)
     dilasi[labels == largest_label] = foreground_value
     st.image(dilasi, caption='Dilation Image')
