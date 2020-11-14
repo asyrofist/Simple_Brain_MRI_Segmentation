@@ -54,7 +54,7 @@ def gaussianthreshold(image):
     # masking(gaussian)
     foreground_value = 255
     mask = np.uint8(gaussian == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[start_ukuran:end_ukuran]
+    labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     gaussian = np.zeros_like(gaussian)
     gaussian[labels == largest_label] = foreground_value
