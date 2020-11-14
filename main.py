@@ -66,7 +66,7 @@ def dilation(image):
     st.image(dilasi, caption='Dilation Image')
     return dilasi
 
-def cluster(image, dilasi):
+def cluster(image, dilasi, foreground_value):
     #Skull Stripping
     skull_stripped_image = cv2.bitwise_and(image, image, mask = dilasi)
     brain_pixels = skull_stripped_image[dilasi == foreground_value]
@@ -97,4 +97,4 @@ a = bukadata(option)
 b = threshold(a)
 c = erosion(b)
 d = dilation(c)
-cluster(a,d)
+cluster(a, d, 255)
