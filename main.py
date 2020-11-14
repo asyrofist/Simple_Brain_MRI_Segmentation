@@ -15,9 +15,8 @@ Berikut ini algoritma yang digunakan untuk Segmentasi Otak
 IMAGE_PATHS = os.listdir("dicom")
 option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
-bukadata = st.sidebar.checkbox('bukadata')
-
-if bukadata:
+morphology = st.sidebar.checkbox('Morphology1')
+if morphology:
     # get the data
     d = pydicom.read_file('dicom/'+option)
     file = np.array(d.pixel_array)
