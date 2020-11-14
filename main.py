@@ -136,26 +136,18 @@ def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):
     segmented_image = image
     hasil_image = segmented_image
     for x in range(256):
-    for y in range(256):
-        if segmented_image[x][y] == 0:
-            jml_d = jml_d + 1
-        elif segmented_image[x][y] != 0 and a == 0:
-            a = segmented_image[x][y]
-            jml_a = jml_a + 1
-        elif segmented_image[x][y] == a:
-            jml_a = jml_a + 1
-            
-#     st.write(a)
-#     st.write(b)
-#     st.write(c)
-#     st.write(jml_a)
-#     st.write(jml_b)
-#     st.write(jml_c)
-#     st.write(jml_d)
-
+        for y in range(256):
+            if segmented_image[x][y] == 0:
+                jml_d = jml_d + 1
+            elif segmented_image[x][y] != 0 and a == 0:
+                a = segmented_image[x][y]
+                jml_a = jml_a + 1
+            elif segmented_image[x][y] == a:
+                jml_a = jml_a + 1
+                
     if jml_d>jml_a and jml_d>jml_b and jml_d>jml_c:
-    if jml_a>jml_b and jml_a>jml_c:
-        hasil_image[segmented_image!=a] = 0
+        if jml_a>jml_b and jml_a>jml_c:
+            hasil_image[segmented_image!=a] = 0
 
     st.image(hasil_image, caption='Divided Image')    
     return hasil_image
