@@ -194,7 +194,7 @@ def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):
         #     segmented_image[segmented_image!=c]=0
 
     st.image(hasil_image, caption='Divided Image')
-    return hasil_image
+    return segmented_image
 
 
 morphology1a = st.sidebar.checkbox('Morphology1 (Otsu-Erosion-Dilation-cluster)')
