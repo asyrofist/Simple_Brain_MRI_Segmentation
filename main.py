@@ -108,7 +108,6 @@ elif morphology2:
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     binarized = np.zeros_like(binarized)
     binarized[labels == largest_label] = foreground_value
-    ShowImage('binarized',binarized,'rgb')
     st.image(binarized, caption='Gambar Otsu',use_column_width=True)
     
     # Erosion
