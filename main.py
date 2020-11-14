@@ -24,9 +24,9 @@ start_ukuran, end_ukuran = st.sidebar.select_slider(
      'Select Range?',
      options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
      value=(1, ukuran-1))
-nilai_iterasi = st.sidebar.slider('Berapa Epsilon?', 0, 100, 50)
-nilai_cluster = st.sidebar.slider('Berapa Epsilon?', 0, 10, 4)
-nilai_repetition = st.sidebar.slider('Berapa Epsilon?', 0, 100, 10)
+nilai_iterasi = st.sidebar.slider('Berapa Iterasi cluster?', 6, 100, 50)
+nilai_cluster = st.sidebar.slider('Berapa Cluster?', 3, 10, 4)
+nilai_repetition = st.sidebar.slider('Berapa Repetition?', 9, 98, 10)
 
 
 def bukadata(file):    
