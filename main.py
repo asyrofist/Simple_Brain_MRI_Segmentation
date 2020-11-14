@@ -17,8 +17,8 @@ option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
-start_color, end_color = st.select_slider(
-     'Select a range of color wavelength',
+start_ukuran, end_ukuran = st.select_slider(
+     'Select Range',
      options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
      value=(1, 3))
 
@@ -39,7 +39,7 @@ def otsuthreshold(image):
     _,binarized = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     foreground_value = 255
     mask = np.uint8(binarized == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     binarized = np.zeros_like(binarized)
     binarized[labels == largest_label] = foreground_value
@@ -52,7 +52,7 @@ def gaussianthreshold(image):
     # masking(gaussian)
     foreground_value = 255
     mask = np.uint8(gaussian == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     gaussian = np.zeros_like(gaussian)
     gaussian[labels == largest_label] = foreground_value
@@ -65,7 +65,7 @@ def erosion(image):
     erosion = cv2.erode(image,kernel,iterations = iterasi)
     foreground_value = 255
     mask = np.uint8(erosion == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     erosion = np.zeros_like(erosion)
     erosion[labels == largest_label] = foreground_value
@@ -91,7 +91,7 @@ def closing(image):
     closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= itrasi)
     foreground_value = 255
     mask_closing = np.uint8(closing >= foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask_closing, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask_closing, 4)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     close = np.zeros_like(closing)
     close[labels == largest_label] = foreground_value
@@ -104,7 +104,7 @@ def dilation(image):
     dilasi = cv2.dilate(image,kernel,iterations = 2)
     foreground_value = 255
     mask = np.uint8(dilasi == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     dilasi = np.zeros_like(dilasi)
     dilasi[labels == largest_label] = foreground_value
