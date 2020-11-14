@@ -50,23 +50,27 @@ def erosion(image):
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     erosion = np.zeros_like(erosion)
     erosion[labels == largest_label] = foreground_value
-    st.image(erosion, caption='Erosion Image',use_column_width=True)
+    st.image(erosion, caption='Erosion Image')
     return erosion
+
+def dilation(image):
+    # dilation from opening
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    dilasi = cv2.dilate(image,kernel,iterations = 2)
+    foreground_value = 255
+    mask = np.uint8(dilasi == foreground_value)
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    dilasi = np.zeros_like(dilasi)
+    dilasi[labels == largest_label] = foreground_value
+    st.image(dilasi, caption='Dilation Image')
+    return dilasi
 
 a = bukadata(option)
 b = threshold(a)
-erosion(b)
+c = erosion(b)
+dilation(c)
 
-#     # dilation from opening
-#     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-#     dilasi = cv2.dilate(erosion,kernel,iterations = 2)
-#     foreground_value = 255
-#     mask = np.uint8(dilasi == foreground_value)
-#     labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
-#     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
-#     dilasi = np.zeros_like(dilasi)
-#     dilasi[labels == largest_label] = foreground_value
-#     st.image(dilasi, caption='Dilation Image',use_column_width=True)
 
 #     img_2d = file.astype(float)
 #     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
