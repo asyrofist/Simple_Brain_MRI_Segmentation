@@ -53,6 +53,19 @@ def erosion(image):
     st.image(erosion, caption='Erosion Image')
     return erosion
 
+def opening(image):
+    # kernel = np.ones((5, 5), np.uint8)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= 2)
+    foreground_value = 255
+    mask = np.uint8(opening == foreground_value)
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    opening = np.zeros_like(opening)
+    opening[labels == largest_label] = foreground_value
+    st.image(opening, caption='Opening Image')
+    return opening
+
 def dilation(image):
     # dilation from opening
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
@@ -93,8 +106,20 @@ def cluster(image, dilasi, foreground_value):
     st.image(segmented_image, caption='Segmented Image')
     return segmented_image
 
-a = bukadata(option)
-b = threshold(a)
-c = erosion(b)
-d = dilation(c)
-cluster(a, d, 255)
+morphology1 = st.sidebar.checkbox('Morphology1')
+morphology2 = st.sidebar.checkbox('Morphology2')
+if morphology1:
+    a = bukadata(option)
+    b = threshold(a)
+    c = erosion(b)
+    d = dilation(c)
+    cluster(a, d, 255)
+
+elif morphology2:
+    a = bukadata(option)
+    b = threshold(a)
+    c = erosion(b)
+    d = opening(c)
+    e = dilation(d)
+    cluster(a, e, 255)
+    
