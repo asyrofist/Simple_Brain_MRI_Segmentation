@@ -17,7 +17,7 @@ option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
-st.sidebar.write("Anda memilih:", iterasi)
+st.sidebar.write("Anda memilih: {} iterasi".format(iterasi))
 
 def bukadata(file):    
     # get the data
