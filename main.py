@@ -40,19 +40,22 @@ def threshold(image):
     st.image(binarized, caption='Otsu Image')
     return binarized
 
+def erosion(image):
+    # erosion from otsu
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    erosion = cv2.erode(image,kernel,iterations = 4)
+    foreground_value = 255
+    mask = np.uint8(erosion == foreground_value)
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    erosion = np.zeros_like(erosion)
+    erosion[labels == largest_label] = foreground_value
+    st.image(erosion, caption='Erosion Image',use_column_width=True)
+    return erosion
+
 a = bukadata(option)
-threshold(a)
-    
-#     # erosion from otsu
-#     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-#     erosion = cv2.erode(binarized,kernel,iterations = 4)
-#     foreground_value = 255
-#     mask = np.uint8(erosion == foreground_value)
-#     labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
-#     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
-#     erosion = np.zeros_like(erosion)
-#     erosion[labels == largest_label] = foreground_value
-#     st.image(erosion, caption='Erosion Image',use_column_width=True)
+b = threshold(a)
+erosion(b)
 
 #     # dilation from opening
 #     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
