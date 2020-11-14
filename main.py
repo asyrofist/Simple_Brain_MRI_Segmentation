@@ -41,7 +41,9 @@ def otsuthreshold(image):
     return binarized
 
 def gaussianthreshold(image):
-    gaussian = cv2.adaptiveThreshold(hasil,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\cv2.THRESH_BINARY,115, 1)
+    gaussian = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
+                cv2.THRESH_BINARY,115, 1)
+    # masking(gaussian)
     foreground_value = 255
     mask = np.uint8(gaussian == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
@@ -49,8 +51,8 @@ def gaussianthreshold(image):
     gaussian = np.zeros_like(gaussian)
     gaussian[labels == largest_label] = foreground_value
     st.image(gaussian, caption='Gaussian Image')
-    return gassian
-
+    return gaussian
+    
 def erosion(image):
     # erosion from otsu
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
