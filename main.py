@@ -28,6 +28,11 @@ if allinone:
         hasil = img_2d_scaled
         st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
+columns = 6
+rows = 7
+for i in range(1, columns*rows +1):
+    st.image(hasil)
+
 # morphology = st.sidebar.checkbox('Morphology1')
 # if morphology:
 #     # get the data
