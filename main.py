@@ -19,7 +19,7 @@ st.sidebar.subheader('Parameter')
 foreground = st.sidebar.slider('Berapa Foreground?', 0, 128, 255)
 nilai_threshold = st.sidebar.slider('Berapa Threshold?', 141, 161, 155)
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
-ukuran = st.sidebar.slider('Berapa ukuran?', 0, 10, iterasi)
+ukuran = st.sidebar.slider('Berapa ukuran?', 0, 10, 4)
 start_ukuran, end_ukuran = st.sidebar.select_slider(
      'Select Range?',
      options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
