@@ -91,8 +91,7 @@ if morphology1:
     st.image(segmented_image, caption='Segmented Image',use_column_width=True)
 
 elif morphology2:
-    basepath ="C://Users//Asus//Desktop//tugas//RPLB (python)//Simple_Brain_MRI_Segmentation//dicom//"
-    d = pydicom.read_file(basepath + "Z108")
+    d = pydicom.read_file('dicom/'+option)
     file = np.array(d.pixel_array)
     img = file
     img_2d = img.astype(float)
