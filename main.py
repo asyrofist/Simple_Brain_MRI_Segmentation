@@ -26,7 +26,7 @@ if bukadata:
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
     img_2d_scaled = np.uint8(img_2d_scaled)
     hasil = img_2d_scaled
-    st.image(hasil, caption='Gambar Origin')
+    st.write.image(hasil, caption='Gambar Origin')
     
 elif otsuthreshold:
     #OTSU THRESHOLDING
@@ -43,7 +43,7 @@ elif otsuthreshold:
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     binarized = np.zeros_like(binarized)
     binarized[labels == largest_label] = foreground_value
-    st.image(binarized, caption='Otsu Image')
+    st.write.image(binarized, caption='Otsu Image')
 
 #     # erosion from otsu
 #     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
