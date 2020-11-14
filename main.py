@@ -238,7 +238,7 @@ elif morphology3:
     b = otsuthreshold(a)
     c = cluster(a, b, 255)
     d = divided(c)
-    e = opening(d)
+    e = opening(b)
 #     f = closing(e)
 #     dilation(f)
 
