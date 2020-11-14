@@ -17,6 +17,8 @@ option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 bukadata = st.sidebar.checkbox('Open Data')
 otsuthreshold = st.sidebar.checkbox('Otsu Threshold')
+
+bukafile = []
 if bukadata:
     # get the data
     d = pydicom.read_file('dicom/'+option)
@@ -26,24 +28,21 @@ if bukadata:
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
     img_2d_scaled = np.uint8(img_2d_scaled)
     hasil = img_2d_scaled
-    st.write.image(hasil, caption='Gambar Origin')
-    
+    bukafile.append(hasil)
+    st.image(hasil, caption='Gambar Origin')
+
+hasilotsu = []
 elif otsuthreshold:
     #OTSU THRESHOLDING
-    d = pydicom.read_file('dicom/'+option)
-    file = np.array(d.pixel_array)
-    img = file
-    img_2d = img.astype(float)
-    img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
-    img_2d_scaled = np.uint8(img_2d_scaled)
-    _,binarized = cv2.threshold(img_2d_scaled, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    _,binarized = cv2.threshold(fileterbuka, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     foreground_value = 255
     mask = np.uint8(binarized == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     binarized = np.zeros_like(binarized)
     binarized[labels == largest_label] = foreground_value
-    st.write.image(binarized, caption='Otsu Image')
+    hasilotsu.append(binarized)
+    st.image(binarized, caption='Otsu Image')
 
 #     # erosion from otsu
 #     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
