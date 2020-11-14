@@ -163,6 +163,6 @@ elif morphology4:
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
-    d = opening(c)
+    d = closing(c)
     e = dilation(d)
     cluster(a, e, 255)
