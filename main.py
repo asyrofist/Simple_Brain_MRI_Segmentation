@@ -26,17 +26,8 @@ if allinone:
         img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
         img_2d_scaled = np.uint8(img_2d_scaled)
         hasil = img_2d_scaled
-        
-        
-fig=st.image.figure(figsize=(49, 49))
-columns = 6
-rows = 7
-for i in range(1, columns*rows +1):
-    fig.add_subplot(rows, columns, i)
-    st.image.imshow(list_b[i])
-st.image.show()
+        st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
-        
 # morphology = st.sidebar.checkbox('Morphology1')
 # if morphology:
 #     # get the data
