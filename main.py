@@ -237,8 +237,8 @@ elif morphology3:
     a = bukadata(option)
     b = otsuthreshold(a)
     c = cluster(a, b, 255)
-#     d = divided(c)
-    erosion(c)
+    d = divided(c)
+    closing(d)
 #     f = closing(e)
 #     dilation(f)
 
