@@ -19,8 +19,8 @@ st.sidebar.subheader('Parameter')
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
 start_color, end_color = st.select_slider(
      'Select a range of color wavelength',
-     options=['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-     value=('red', 'blue'))
+     options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+     value=(1, 3))
 
 def bukadata(file):    
     # get the data
