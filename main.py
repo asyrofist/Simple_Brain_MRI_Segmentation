@@ -14,7 +14,7 @@ bukadata = st.sidebar.checkbox('bukadata')
 
 if bukadata:
     # get the data
-    d = pydicom.read_file(option)
+    d = pydicom.read_file(IMAGE_PATHS+option)
     file = np.array(d.pixel_array)
     img = file
     img_2d = img.astype(float)
