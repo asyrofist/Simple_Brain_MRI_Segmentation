@@ -191,7 +191,7 @@ morphology1a = st.sidebar.checkbox('Morphology1 (Otsu-Erosion-Dilation-cluster)'
 morphology2a = st.sidebar.checkbox('Morphology2 (Gaussian-Erosion-Dilation-cluster)')
 morphology1b = st.sidebar.checkbox('Improvement Morphology1 (Otsu-Erosion-Opening-Dilation-cluster)')
 morphology2b = st.sidebar.checkbox('Improvement Morphology2 (Gaussian-Erosion-Closing-Dilation-cluster)')
-morphology3 = st.sidebar.checkbox('Morphology3 (Otsu-cluster-Erosion-Dilation)')
+morphology3  = st.sidebar.checkbox('Morphology3 (Otsu-cluster-Opening-Closing-Dilation)')
 
 if morphology1a:
     a = bukadata(option)
@@ -236,7 +236,7 @@ elif morphology3:
     b = otsuthreshold(a)
     c = cluster(a, b, 255)
     d = divided(c)
-    e = opening(d)
+#     e = opening(d)
 #     f = closing(e)
 #     dilation(f)
 
