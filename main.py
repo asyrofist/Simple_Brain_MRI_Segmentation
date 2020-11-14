@@ -17,10 +17,11 @@ option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
 foreground = st.sidebar.slider('Berapa Foreground?', 0, 128, 255)
+nilai_threshold = st.sidebar.slider('Berapa Threshold?', 0, 255, 155)
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
 ukuran = st.sidebar.slider('Berapa ukuran?', 0, 10, 4)
 start_ukuran, end_ukuran = st.sidebar.select_slider(
-     'Select Range',
+     'Select Range?',
      options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
      value=(1, ukuran-1))
 
@@ -31,7 +32,7 @@ def bukadata(file):
     file = np.array(d.pixel_array)
     img = file
     img_2d = img.astype(float)
-    img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
+    img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground.0
     img_2d_scaled = np.uint8(img_2d_scaled)
     hasil = img_2d_scaled
     st.image(hasil, caption='Gambar Origin')
@@ -39,8 +40,8 @@ def bukadata(file):
 
 def otsuthreshold(image):
     #OTSU THRESHOLDING
-    _,binarized = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    foreground_value = 255
+    _,binarized = cv2.threshold(image, 0, foreground, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    foreground_value = foreground
     mask = np.uint8(binarized == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
@@ -50,8 +51,8 @@ def otsuthreshold(image):
     return binarized
 
 def gaussianthreshold(image):
-    gaussian = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
-                cv2.THRESH_BINARY,115, 1)
+    gaussian = cv2.adaptiveThreshold(image, foreground, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
+                cv2.THRESH_BINARY,nilai_threshold, 1)
     # masking(gaussian)
     foreground_value = foreground
     mask = np.uint8(gaussian == foreground_value)
@@ -76,7 +77,6 @@ def erosion(image):
     return erosion
 
 def opening(image):
-    # kernel = np.ones((5, 5), np.uint8)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= iterasi)
     foreground_value = foreground
@@ -89,7 +89,6 @@ def opening(image):
     return opening
 
 def closing(image):
-#     kernel = np.ones((5, 5), np.uint8)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= itrasi)
     foreground_value = foreground
@@ -122,11 +121,16 @@ def cluster(image, dilasi, foreground_value):
     # Adapting the data to K-means
     kmeans_input = np.float32(brain_pixels.reshape(brain_pixels.shape[0], brain_pixels.ndim))
 
+    nilai_epsilon = st.sidebar.slider('Berapa Epsilon?', 0, 1, 0.01)
+    nilai_iterasi = st.sidebar.slider('Berapa Epsilon?', 0, 100, 50)
+    nilai_cluster = st.sidebar.slider('Berapa Epsilon?', 0, 10, 4)
+    nilai_repetition = st.sidebar.slider('Berapa Epsilon?', 0, 100, 10)
+     
     # K-means parameters
-    epsilon = 0.01
-    number_of_iterations = 50
-    number_of_clusters = 4
-    number_of_repetition = 10
+    epsilon = nilai_epsilon
+    number_of_iterations = nilai_iterasi
+    number_of_clusters = nilai_cluster
+    number_of_repetition = nilai_repetition
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER,number_of_iterations, epsilon)
     flags = cv2.KMEANS_RANDOM_CENTERS
     # K-means segmentation
@@ -207,14 +211,14 @@ if morphology1a:
     b = otsuthreshold(a)
     c = erosion(b)
     d = dilation(c)
-    cluster(a, d, 255)
+    cluster(a, d, foreground)
 
 elif morphology2a:
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
     d = dilation(c)
-    cluster(a, d, 255)
+    cluster(a, d, foreground)
     
 elif morphology1b:
     a = bukadata(option)
@@ -222,7 +226,7 @@ elif morphology1b:
     c = erosion(b)
     d = opening(c)
     e = dilation(d)
-    cluster(a, e, 255)
+    cluster(a, e, foreground)
     
 elif morphology2b:
     a = bukadata(option)
@@ -230,7 +234,7 @@ elif morphology2b:
     c = erosion(b)
     d = closing(c)
     e = dilation(d)
-    cluster(a, e, 255)
+    cluster(a, e, foreground)
     
 elif morphology2b:
     a = bukadata(option)
@@ -238,12 +242,12 @@ elif morphology2b:
     c = erosion(b)
     d = closing(c)
     e = dilation(d)
-    cluster(a, e, 255)
+    cluster(a, e, foreground)
 
 elif morphology3:
     a = bukadata(option)
     b = otsuthreshold(a)
-    c = cluster(a, b, 255)
+    c = cluster(a, b, foreground)
     d = divided(c)
 #     e = opening(d)
 #     f = closing(e)
