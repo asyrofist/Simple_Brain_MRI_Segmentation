@@ -17,7 +17,7 @@ option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
-foreground = st.sidebar.slider('Berapa Foreground?', 0, 128, 255)
+numbermask = st.sidebar.slider('Berapa Foreground?', 0, 10, 4)
 
 def bukadata(file):    
     # get the data
@@ -34,9 +34,9 @@ def bukadata(file):
 def otsuthreshold(image):
     #OTSU THRESHOLDING
     _,binarized = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    foreground_value = foreground
+    foreground_value = 255
     mask = np.uint8(binarized == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     binarized = np.zeros_like(binarized)
     binarized[labels == largest_label] = foreground_value
@@ -47,9 +47,9 @@ def gaussianthreshold(image):
     gaussian = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
                 cv2.THRESH_BINARY,115, 1)
     # masking(gaussian)
-    foreground_value = foreground
+    foreground_value = 255
     mask = np.uint8(gaussian == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     gaussian = np.zeros_like(gaussian)
     gaussian[labels == largest_label] = foreground_value
@@ -60,9 +60,9 @@ def erosion(image):
     # erosion from otsu
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     erosion = cv2.erode(image,kernel,iterations = iterasi)
-    foreground_value = foreground
+    foreground_value = 255
     mask = np.uint8(erosion == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     erosion = np.zeros_like(erosion)
     erosion[labels == largest_label] = foreground_value
@@ -73,9 +73,9 @@ def opening(image):
     # kernel = np.ones((5, 5), np.uint8)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= iterasi)
-    foreground_value = foreground
+    foreground_value = 255
     mask = np.uint8(opening == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     opening = np.zeros_like(opening)
     opening[labels == largest_label] = foreground_value
@@ -86,9 +86,9 @@ def closing(image):
     kernel = np.ones((5, 5), np.uint8)
     # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= itrasi)
-    foreground_value = foreground
+    foreground_value = 255
     mask_closing = np.uint8(closing >= foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask_closing, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask_closing, numbermask)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     close = np.zeros_like(closing)
     close[labels == largest_label] = foreground_value
@@ -99,9 +99,9 @@ def dilation(image):
     # dilation from opening
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     dilasi = cv2.dilate(image,kernel,iterations = 2)
-    foreground_value = foreground
+    foreground_value = 255
     mask = np.uint8(dilasi == foreground_value)
-    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    labels, stats = cv2.connectedComponentsWithStats(mask, numbermask)[1:3]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     dilasi = np.zeros_like(dilasi)
     dilasi[labels == largest_label] = foreground_value
@@ -201,14 +201,14 @@ if morphology1a:
     b = otsuthreshold(a)
     c = erosion(b)
     d = dilation(c)
-    cluster(a, d, foreground)
+    cluster(a, d, 255)
 
 elif morphology2a:
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
     d = dilation(c)
-    cluster(a, d, foreground)
+    cluster(a, d, 255)
     
 elif morphology1b:
     a = bukadata(option)
@@ -216,7 +216,7 @@ elif morphology1b:
     c = erosion(b)
     d = opening(c)
     e = dilation(d)
-    cluster(a, e, foreground)
+    cluster(a, e, 255)
     
 elif morphology2b:
     a = bukadata(option)
@@ -224,7 +224,7 @@ elif morphology2b:
     c = erosion(b)
     d = closing(c)
     e = dilation(d)
-    cluster(a, e, foreground)
+    cluster(a, e, 255)
     
 elif morphology2b:
     a = bukadata(option)
@@ -232,12 +232,12 @@ elif morphology2b:
     c = erosion(b)
     d = closing(c)
     e = dilation(d)
-    cluster(a, e, foreground)
+    cluster(a, e, 255)
 
 elif morphology3:
     a = bukadata(option)
     b = otsuthreshold(a)
-    c = cluster(a, b, foreground)
+    c = cluster(a, b, 255)
     d = divided(c)
 #     e = opening(d)
 #     f = closing(e)
