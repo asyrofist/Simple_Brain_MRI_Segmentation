@@ -7,6 +7,11 @@ import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
 
+st.write("""
+# Similarity & Classiifcation Measurements
+Berikut ini algoritma yang digunakan untuk pengukuran similaritas dan klasifikasi
+""")
+
 IMAGE_PATHS = os.listdir("dicom")
 option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
