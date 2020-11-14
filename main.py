@@ -15,7 +15,7 @@ Berikut ini algoritma yang digunakan untuk Segmentasi Otak
 IMAGE_PATHS = os.listdir("dicom")
 option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
-st.sidebar.subheader('Parameter')
+st.sidebar.subheader('Parameter Threshold')
 foreground = st.sidebar.slider('Berapa Foreground?', 0, 128, 255)
 nilai_threshold = st.sidebar.slider('Berapa Threshold?', 141, 161, 155)
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
@@ -24,6 +24,7 @@ start_ukuran, end_ukuran = st.sidebar.select_slider(
      'Select Range?',
      options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
      value=(1, ukuran-1))
+st.sidebar.subheader('Parameter Cluster')
 nilai_iterasi = st.sidebar.slider('Berapa Iterasi cluster?', 6, 100, 50)
 nilai_cluster = st.sidebar.slider('Berapa Cluster?', 3, 10, 4)
 nilai_repetition = st.sidebar.slider('Berapa Repetition?', 9, 98, 10)
