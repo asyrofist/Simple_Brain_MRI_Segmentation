@@ -8,8 +8,10 @@ import skimage.segmentation as seg
 from PIL import Image
 
 IMAGE_PATHS = os.listdir("dicom")
-option = st.selectbox('Pilih File Dicom?',IMAGE_PATHS)
+option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
+bukadata = st.sidebar.checkbox('bukadata')
+
 if bukadata:
     # get the data
     d = pydicom.read_file(option)
