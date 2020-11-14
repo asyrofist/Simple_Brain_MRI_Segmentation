@@ -132,26 +132,90 @@ def cluster(image, dilasi, foreground_value):
     st.image(segmented_image, caption='Segmented Image')
     return segmented_image
 
-morphology1 = st.sidebar.checkbox('Morphology1 (Otsu-Erosion-Dilation)')
-morphology2 = st.sidebar.checkbox('Morphology2 (Gaussian-Erosion-Dilation)')
-morphology3 = st.sidebar.checkbox('Improvement Morphology1 (Otsu-Erosion-Opening-Dilation)')
-morphology4 = st.sidebar.checkbox('Improvement Morphology2 (Gaussian-Erosion-Closing-Dilation)')
+def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):  
+    hasil_image = image
+    for x in range(256):
+        for y in range(256):
+            if segmented_image[x][y] == 0:
+                jml_d = jml_d + 1
+            elif segmented_image[x][y] != 0 and a == 0:
+                a = segmented_image[x][y]
+                jml_a = jml_a + 1
+            elif segmented_image[x][y]!=0 and segmented_image[x][y]!=a and b==0:
+                b=segmented_image[x][y]
+                jml_b=jml_b+1
+            elif segmented_image[x][y]!=0 and segmented_image[x][y]!=a and segmented_image[x][y]!=b and c==0:
+                c=segmented_image[x][y]
+                jml_c=jml_c+1
+            elif segmented_image[x][y] == a:
+                jml_a = jml_a + 1
+            elif segmented_image[x][y]==b:
+                jml_b=jml_b+1
+            elif segmented_image[x][y]==c:
+                jml_c=jml_c+1
 
-if morphology1:
+    st.write(a)
+    st.write(b)
+    st.write(c)
+    st.write(jml_a)
+    st.write(jml_b)
+    st.write(jml_c)
+    st.write(jml_d)
+
+    if jml_a>jml_b and jml_a>jml_c and jml_a>jml_d:
+        if jml_b>jml_c and jml_b>jml_d:
+            segmented_image[segmented_image!=b]=0
+        elif jml_c>jml_b and jml_c>jml_d:
+            segmented_image[segmented_image!=c]=0
+        elif jml_d>jml_b and jml_d>jml_c:
+            segmented_image[segmented_image!=d]=0
+    elif jml_b>jml_a and jml_b>jml_c and jml_b>jml_d:
+        if jml_a>jml_c and jml_a>jml_d:
+            segmented_image[segmented_image!=a]=0
+        elif jml_c>jml_a and jml_c>jml_d:
+            segmented_image[segmented_image!=c]=0
+        elif jml_d>jml_a and jml_d>jml_c:
+            segmented_image[segmented_image!=d]=0
+    elif jml_c>jml_a and jml_c>jml_b and jml_c>jml_d:
+        if jml_a>jml_b and jml_a>jml_d:
+            segmented_image[segmented_image!=a]=0
+        elif jml_b>jml_a and jml_b>jml_d:
+            segmented_image[segmented_image!=b]=0
+        elif jml_d>jml_a and jml_d>jml_b:
+            segmented_image[segmented_image!=d]=0
+    if jml_d>jml_a and jml_d>jml_b and jml_d>jml_c:
+        if jml_a>jml_b and jml_a>jml_c:
+            hasil_image[segmented_image!=a] = 0
+        elif jml_b>jml_a and jml_b>jml_c:
+            segmented_image[segmented_image!=b]=0
+        elif jml_c>jml_a and jml_c>jml_b:
+            segmented_image[segmented_image!=c]=0
+
+    st.image(hasil_image, caption='Divided Image')    
+    return hasil_image
+
+
+morphology1a = st.sidebar.checkbox('Morphology1 (Otsu-Erosion-Dilation-cluster)')
+morphology2a = st.sidebar.checkbox('Morphology2 (Gaussian-Erosion-Dilation-cluster)')
+morphology1b = st.sidebar.checkbox('Improvement Morphology1 (Otsu-Erosion-Opening-Dilation-cluster)')
+morphology2b = st.sidebar.checkbox('Improvement Morphology2 (Gaussian-Erosion-Closing-Dilation-cluster)')
+morphology3 = st.sidebar.checkbox('Morphology3 (Otsu-cluster-Erosion-Dilation)')
+
+if morphology1a:
     a = bukadata(option)
     b = otsuthreshold(a)
     c = erosion(b)
     d = dilation(c)
     cluster(a, d, 255)
 
-elif morphology2:
+elif morphology2a:
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
     d = dilation(c)
     cluster(a, d, 255)
     
-elif morphology3:
+elif morphology1b:
     a = bukadata(option)
     b = otsuthreshold(a)
     c = erosion(b)
@@ -159,10 +223,29 @@ elif morphology3:
     e = dilation(d)
     cluster(a, e, 255)
     
-elif morphology4:
+elif morphology2b:
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
     d = closing(c)
     e = dilation(d)
     cluster(a, e, 255)
+    
+elif morphology2b:
+    a = bukadata(option)
+    b = gaussianthreshold(a)
+    c = erosion(b)
+    d = closing(c)
+    e = dilation(d)
+    cluster(a, e, 255)
+
+elif morphology3:
+    a = bukadata(option)
+    b = otsuthreshold(a)
+    c = cluster(a, b, 255)
+    d = divided(c)
+    e = opening(d)
+    f = closing(e)
+    dilation(f)
+
+    
