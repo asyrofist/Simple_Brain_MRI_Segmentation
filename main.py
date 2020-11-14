@@ -63,7 +63,7 @@ def gaussianthreshold(image):
     
 def erosion(image):
     # erosion from otsu
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     erosion = cv2.erode(image,kernel,iterations = iterasi)
     foreground_value = 255
     mask = np.uint8(erosion == foreground_value)
@@ -76,7 +76,7 @@ def erosion(image):
 
 def opening(image):
     # kernel = np.ones((5, 5), np.uint8)
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= iterasi)
     foreground_value = 255
     mask = np.uint8(opening == foreground_value)
@@ -88,8 +88,8 @@ def opening(image):
     return opening
 
 def closing(image):
-    kernel = np.ones((5, 5), np.uint8)
-    # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+#     kernel = np.ones((5, 5), np.uint8)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= itrasi)
     foreground_value = 255
     mask_closing = np.uint8(closing >= foreground_value)
@@ -102,7 +102,7 @@ def closing(image):
 
 def dilation(image):
     # dilation from opening
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     dilasi = cv2.dilate(image,kernel,iterations = iterasi)
     foreground_value = 255
     mask = np.uint8(dilasi == foreground_value)
