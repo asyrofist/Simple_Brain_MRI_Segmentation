@@ -15,10 +15,11 @@ Berikut ini algoritma yang digunakan untuk Segmentasi Otak
 IMAGE_PATHS = os.listdir("dicom")
 option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
-bukadata = st.sidebar.checkbox('Open Data')
-otsuthreshold = st.sidebar.checkbox('Otsu Threshold')
 
 bukafile = []
+hasilotsu = []
+bukadata = st.sidebar.checkbox('Open Data')
+otsuthreshold = st.sidebar.checkbox('Otsu Threshold')
 if bukadata:
     # get the data
     d = pydicom.read_file('dicom/'+option)
@@ -30,8 +31,7 @@ if bukadata:
     hasil = img_2d_scaled
     bukafile.append(hasil)
     st.image(hasil, caption='Gambar Origin')
-
-hasilotsu = []
+    
 elif otsuthreshold:
     #OTSU THRESHOLDING
     _,binarized = cv2.threshold(fileterbuka, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
