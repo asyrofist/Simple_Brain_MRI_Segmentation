@@ -9,17 +9,17 @@ from PIL import Image
 
 IMAGE_PATHS = os.listdir("dicom")
 option = st.selectbox('Pilih File Dicom?',IMAGE_PATHS)
-# d = pydicom.read_file(IMAGE_PATHS)
-# st.sidebar.write('You selected:', d)
-# if bukadata:
-#     # get the data
-#     file = np.array(d.pixel_array)
-#     img = file
-#     img_2d = img.astype(float)
-#     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
-#     img_2d_scaled = np.uint8(img_2d_scaled)
-#     hasil = img_2d_scaled
-#     st.image(hasil, caption='Gambar Origin',use_column_width=True)
+st.sidebar.write('You selected:', d)
+if bukadata:
+    # get the data
+    d = pydicom.read_file(option)
+    file = np.array(d.pixel_array)
+    img = file
+    img_2d = img.astype(float)
+    img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
+    img_2d_scaled = np.uint8(img_2d_scaled)
+    hasil = img_2d_scaled
+    st.image(hasil, caption='Gambar Origin',use_column_width=True)
 
 #     #OTSU THRESHOLDING
 #     _,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
