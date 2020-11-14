@@ -66,17 +66,9 @@ def dilation(image):
     st.image(dilasi, caption='Dilation Image')
     return dilasi
 
-def cluster():
-    # get the data
-    d = pydicom.read_file('dicom/'+file)
-    file = np.array(d.pixel_array)
-    img_2d = file.astype(float)
-    img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
-    img_2d_scaled = np.uint8(img_2d_scaled)
-    hasil = img_2d_scaled
-
+def cluster(image, dilasi):
     #Skull Stripping
-    skull_stripped_image = cv2.bitwise_and(hasil, hasil, mask = dilasi)
+    skull_stripped_image = cv2.bitwise_and(image, image, mask = dilasi)
     brain_pixels = skull_stripped_image[dilasi == foreground_value]
 
     # Adapting the data to K-means
@@ -104,5 +96,5 @@ def cluster():
 a = bukadata(option)
 b = threshold(a)
 c = erosion(b)
-dilation(c)
-cluster()
+d = dilation(c)
+cluster(a,d)
