@@ -82,7 +82,7 @@ def opening(image):
 def closing(image):
     kernel = np.ones((5, 5), np.uint8)
     # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-    closing = cv2.morphologyEx(erosion, cv2.MORPH_CLOSE, kernel, iterations= 2)
+    closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= 2)
     foreground_value = 255
     mask_closing = np.uint8(closing >= foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask_closing, 4)[1:3]
