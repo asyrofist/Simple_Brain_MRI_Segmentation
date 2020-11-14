@@ -16,6 +16,7 @@ IMAGE_PATHS = os.listdir("dicom")
 option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
+foreground = st.sidebar.slider('Berapa Foreground?', 0, 128, 255)
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
 ukuran = st.sidebar.slider('Berapa ukuran?', 0, 10, 4)
 start_ukuran, end_ukuran = st.sidebar.select_slider(
@@ -52,7 +53,7 @@ def gaussianthreshold(image):
     gaussian = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
                 cv2.THRESH_BINARY,115, 1)
     # masking(gaussian)
-    foreground_value = 255
+    foreground_value = foreground
     mask = np.uint8(gaussian == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
@@ -65,7 +66,7 @@ def erosion(image):
     # erosion from otsu
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     erosion = cv2.erode(image,kernel,iterations = iterasi)
-    foreground_value = 255
+    foreground_value = foreground
     mask = np.uint8(erosion == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
@@ -78,7 +79,7 @@ def opening(image):
     # kernel = np.ones((5, 5), np.uint8)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= iterasi)
-    foreground_value = 255
+    foreground_value = foreground
     mask = np.uint8(opening == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
@@ -91,7 +92,7 @@ def closing(image):
 #     kernel = np.ones((5, 5), np.uint8)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= itrasi)
-    foreground_value = 255
+    foreground_value = foreground
     mask_closing = np.uint8(closing >= foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask_closing, ukuran)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
@@ -104,7 +105,7 @@ def dilation(image):
     # dilation from opening
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     dilasi = cv2.dilate(image,kernel,iterations = iterasi)
-    foreground_value = 255
+    foreground_value = foreground
     mask = np.uint8(dilasi == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, ukuran)[start_ukuran:end_ukuran]
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
