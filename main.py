@@ -238,7 +238,7 @@ elif morphology3:
     b = otsuthreshold(a)
     c = cluster(a, b, 255)
     d = divided(c)
-    closing(d)
+    e = erosion(d)
 #     f = closing(e)
 #     dilation(f)
 
