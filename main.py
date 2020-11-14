@@ -51,7 +51,7 @@ def otsuthreshold(image):
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     binarized = np.zeros_like(binarized)
     binarized[labels == largest_label] = foreground_value
-    st.image(binarized, caption='Otsu Image')
+    st.image(binarized, caption='Otsu Image', use_column_width=True)
     return binarized
 
 def gaussianthreshold(image):
@@ -64,7 +64,7 @@ def gaussianthreshold(image):
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     gaussian = np.zeros_like(gaussian)
     gaussian[labels == largest_label] = foreground_value
-    st.image(gaussian, caption='Gaussian Image')
+    st.image(gaussian, caption='Gaussian Image', use_column_width=True)
     return gaussian
     
 def erosion(image):
@@ -77,7 +77,7 @@ def erosion(image):
     largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     erosion = np.zeros_like(erosion)
     erosion[labels == largest_label] = foreground_value
-    st.image(erosion, caption='Erosion Image')
+    st.image(erosion, caption='Erosion Image', use_column_width=True)
     return erosion
 
 def opening(image):
@@ -89,7 +89,7 @@ def opening(image):
     largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     opening = np.zeros_like(opening)
     opening[labels == largest_label] = foreground_value
-    st.image(opening, caption='Opening Image')
+    st.image(opening, caption='Opening Image', use_column_width=True)
     return opening
 
 def closing(image):
@@ -101,7 +101,7 @@ def closing(image):
     largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     close = np.zeros_like(closing)
     close[labels == largest_label] = foreground_value
-    st.image(close, caption='Closing Image')
+    st.image(close, caption='Closing Image', use_column_width=True)
     return close
 
 def dilation(image):
@@ -114,7 +114,7 @@ def dilation(image):
     largest_label = 1 + np.argmax(stats[start_ukuran:, cv2.CC_STAT_AREA])
     dilasi = np.zeros_like(dilasi)
     dilasi[labels == largest_label] = foreground_value
-    st.image(dilasi, caption='Dilation Image')
+    st.image(dilasi, caption='Dilation Image', use_column_width=True)
     return dilasi
 
 def cluster(image, dilasi, foreground_value):
@@ -141,7 +141,7 @@ def cluster(image, dilasi, foreground_value):
     #segmented Image
     segmented_image = np.zeros_like(dilasi)
     segmented_image[dilasi == foreground_value] = labels
-    st.image(segmented_image, caption='Segmented Image')
+    st.image(segmented_image, caption='Segmented Image', use_column_width=True)
     return segmented_image
 
 def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):  
