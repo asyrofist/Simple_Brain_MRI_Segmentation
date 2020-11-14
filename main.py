@@ -16,8 +16,8 @@ IMAGE_PATHS = os.listdir("dicom")
 option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
-iterasi = st.slider('Berapa Iterasi?', 0, 10, 4)
-st.write("Anda memilih:", iterasi)
+iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
+st.sidebar.write("Anda memilih:", iterasi)
 
 def bukadata(file):    
     # get the data
