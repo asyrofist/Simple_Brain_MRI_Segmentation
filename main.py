@@ -199,11 +199,11 @@ def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):
     return segmented_image
 
 st.sidebar.subheader("Metode Morphology")
-morphology1a = st.sidebar.checkbox('Morphology1 (Otsu-Erosion-Dilation-cluster)')
-morphology2a = st.sidebar.checkbox('Morphology2 (Gaussian-Erosion-Dilation-cluster)')
-morphology1b = st.sidebar.checkbox('Improvement Morphology1 (Otsu-Erosion-Opening-Dilation-cluster)')
-morphology2b = st.sidebar.checkbox('Improvement Morphology2 (Gaussian-Erosion-Closing-Dilation-cluster)')
-morphology3  = st.sidebar.checkbox('Morphology3 (Otsu-cluster-Opening-Closing-Dilation)')
+morphology1a = st.sidebar.checkbox('Morphology1\n(Otsu-Erosion-Dilation-cluster)')
+morphology2a = st.sidebar.checkbox('Morphology2\n(Gaussian-Erosion-Dilation-cluster)')
+morphology1b = st.sidebar.checkbox('Improvement Morphology1\n(Otsu-Erosion-Opening-Dilation-cluster)')
+morphology2b = st.sidebar.checkbox('Improvement Morphology2\n(Gaussian-Erosion-Closing-Dilation-cluster)')
+morphology3  = st.sidebar.checkbox('Morphology3\n(Otsu-cluster-Opening-Closing-Dilation)')
 
 if morphology1a:
     a = bukadata(option)
