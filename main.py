@@ -28,7 +28,7 @@ def bukadata(file):
     st.image(hasil, caption='Gambar Origin')
     return hasil
 
-def threshold(image):
+def otsuthreshold(image):
     #OTSU THRESHOLDING
     _,binarized = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     foreground_value = 255
@@ -39,6 +39,17 @@ def threshold(image):
     binarized[labels == largest_label] = foreground_value
     st.image(binarized, caption='Otsu Image')
     return binarized
+
+def gaussianthreshold(image):
+    gaussian = cv2.adaptiveThreshold(hasil,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\cv2.THRESH_BINARY,115, 1)
+    foreground_value = 255
+    mask = np.uint8(gaussian == foreground_value)
+    labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
+    largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
+    gaussian = np.zeros_like(gaussian)
+    gaussian[labels == largest_label] = foreground_value
+    st.image(gaussian, caption='Gaussian Image')
+    return gassian
 
 def erosion(image):
     # erosion from otsu
@@ -110,16 +121,23 @@ morphology1 = st.sidebar.checkbox('Morphology1')
 morphology2 = st.sidebar.checkbox('Morphology2')
 if morphology1:
     a = bukadata(option)
-    b = threshold(a)
+    b = otsuthreshold(a)
     c = erosion(b)
     d = dilation(c)
     cluster(a, d, 255)
 
 elif morphology2:
     a = bukadata(option)
-    b = threshold(a)
+    b = gaussianthreshold(a)
     c = erosion(b)
-    d = opening(c)
-    e = dilation(d)
-    cluster(a, e, 255)
+    d = dilation(c)
+    cluster(a, d, 255)
+    
+# elif morphology3:
+#     a = bukadata(option)
+#     b = otsuthreshold(a)
+#     c = erosion(b)
+#     d = opening(c)
+#     e = dilation(d)
+#     cluster(a, e, 255)
     
