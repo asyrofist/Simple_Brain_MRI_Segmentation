@@ -133,9 +133,7 @@ def cluster(image, dilasi, foreground_value):
     return segmented_image
 
 def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):  
-    segmented_image = image
-    hasil_image = segmented_image
-    
+    segmented_image = image    
     for x in range(256):
         for y in range(256):
             if segmented_image[x][y] == 0:
@@ -185,8 +183,8 @@ def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):
         elif jml_c>jml_a and jml_c>jml_b:
             segmented_image[segmented_image!=c]=0
 
-    st.image(hasil_image, caption='Divided Image')
-#     return hasil_image
+    st.image(segmented_image, caption='Divided Image')
+    return segmented_image
 
 
 morphology1a = st.sidebar.checkbox('Morphology1 (Otsu-Erosion-Dilation-cluster)')
