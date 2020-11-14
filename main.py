@@ -24,6 +24,10 @@ start_ukuran, end_ukuran = st.sidebar.select_slider(
      'Select Range?',
      options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
      value=(1, ukuran-1))
+nilai_epsilon = st.sidebar.slider('Berapa Epsilon?', 0, 1, 0.01)
+nilai_iterasi = st.sidebar.slider('Berapa Epsilon?', 0, 100, 50)
+nilai_cluster = st.sidebar.slider('Berapa Epsilon?', 0, 10, 4)
+nilai_repetition = st.sidebar.slider('Berapa Epsilon?', 0, 100, 10)
 
 
 def bukadata(file):    
@@ -120,11 +124,6 @@ def cluster(image, dilasi, foreground_value):
 
     # Adapting the data to K-means
     kmeans_input = np.float32(brain_pixels.reshape(brain_pixels.shape[0], brain_pixels.ndim))
-
-    nilai_epsilon = st.sidebar.slider('Berapa Epsilon?', 0, 1, 0.01)
-    nilai_iterasi = st.sidebar.slider('Berapa Epsilon?', 0, 100, 50)
-    nilai_cluster = st.sidebar.slider('Berapa Epsilon?', 0, 10, 4)
-    nilai_repetition = st.sidebar.slider('Berapa Epsilon?', 0, 100, 10)
      
     # K-means parameters
     epsilon = nilai_epsilon
