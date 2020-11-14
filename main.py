@@ -15,6 +15,9 @@ Berikut ini algoritma yang digunakan untuk Segmentasi Otak
 IMAGE_PATHS = os.listdir("dicom")
 option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
+st.sidebar.subheader('Parameter')
+iterasi = st.slider('Berapa Iterasi?', 0, 10, 4)
+st.write("Anda memilih:", iterasi)
 
 def bukadata(file):    
     # get the data
@@ -56,7 +59,7 @@ def gaussianthreshold(image):
 def erosion(image):
     # erosion from otsu
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-    erosion = cv2.erode(image,kernel,iterations = 4)
+    erosion = cv2.erode(image,kernel,iterations = iterasi)
     foreground_value = 255
     mask = np.uint8(erosion == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
@@ -69,7 +72,7 @@ def erosion(image):
 def opening(image):
     # kernel = np.ones((5, 5), np.uint8)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-    opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= 2)
+    opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= iterasi)
     foreground_value = 255
     mask = np.uint8(opening == foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask, 4)[1:3]
@@ -82,7 +85,7 @@ def opening(image):
 def closing(image):
     kernel = np.ones((5, 5), np.uint8)
     # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-    closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= 2)
+    closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= itrasi)
     foreground_value = 255
     mask_closing = np.uint8(closing >= foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask_closing, 4)[1:3]
