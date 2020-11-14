@@ -37,6 +37,7 @@ elif otsuthreshold:
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
     img_2d_scaled = np.uint8(img_2d_scaled)
     hasil = img_2d_scaled
+    
     #OTSU THRESHOLDING
     _,binarized = cv2.threshold(hasil, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     foreground_value = 255
@@ -45,7 +46,6 @@ elif otsuthreshold:
     largest_label = 1 + np.argmax(stats[1:, cv2.CC_STAT_AREA])
     binarized = np.zeros_like(binarized)
     binarized[labels == largest_label] = foreground_value
-    hasilotsu.append(binarized)
     st.image(binarized, caption='Otsu Image')
 
     
