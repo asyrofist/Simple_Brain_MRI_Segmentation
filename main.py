@@ -8,8 +8,8 @@ import skimage.segmentation as seg
 from PIL import Image
 
 st.write("""
-# Similarity & Classiifcation Measurements
-Berikut ini algoritma yang digunakan untuk pengukuran similaritas dan klasifikasi
+# Brain Segmenntation
+Berikut ini algoritma yang digunakan untuk Segmentasi Otak
 """)
 
 IMAGE_PATHS = os.listdir("dicom")
