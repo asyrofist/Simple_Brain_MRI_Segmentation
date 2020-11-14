@@ -66,38 +66,40 @@ def dilation(image):
     st.image(dilasi, caption='Dilation Image')
     return dilasi
 
+def cluster():
+    img_2d = file.astype(float)
+    img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
+    img_2d_scaled = np.uint8(img_2d_scaled)
+    hasil = img_2d_scaled
+
+    #Skull Stripping
+    skull_stripped_image = cv2.bitwise_and(hasil, hasil, mask = dilasi)
+    brain_pixels = skull_stripped_image[dilasi == foreground_value]
+
+    # Adapting the data to K-means
+    kmeans_input = np.float32(brain_pixels.reshape(brain_pixels.shape[0], brain_pixels.ndim))
+
+    # K-means parameters
+    epsilon = 0.01
+    number_of_iterations = 50
+    number_of_clusters = 4
+    number_of_repetition = 10
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER,number_of_iterations, epsilon)
+    flags = cv2.KMEANS_RANDOM_CENTERS
+    # K-means segmentation
+    _, labels, centers = cv2.kmeans(kmeans_input, number_of_clusters, None, criteria,number_of_repetition, flags)
+    # Adapting the labels
+    labels = labels.flatten('F')
+    for x in range(number_of_clusters):
+        labels[labels == x] = centers[x]
+    #segmented Image
+    segmented_image = np.zeros_like(dilasi)
+    segmented_image[dilasi == foreground_value] = labels
+    st.image(segmented_image, caption='Segmented Image')
+    return segmented_image
+
 a = bukadata(option)
 b = threshold(a)
 c = erosion(b)
 dilation(c)
-
-
-#     img_2d = file.astype(float)
-#     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
-#     img_2d_scaled = np.uint8(img_2d_scaled)
-#     hasil = img_2d_scaled
-
-#     #Skull Stripping
-#     skull_stripped_image = cv2.bitwise_and(hasil, hasil, mask = dilasi)
-#     brain_pixels = skull_stripped_image[dilasi == foreground_value]
-
-#     # Adapting the data to K-means
-#     kmeans_input = np.float32(brain_pixels.reshape(brain_pixels.shape[0], brain_pixels.ndim))
-
-#     # K-means parameters
-#     epsilon = 0.01
-#     number_of_iterations = 50
-#     number_of_clusters = 4
-#     number_of_repetition = 10
-#     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER,number_of_iterations, epsilon)
-#     flags = cv2.KMEANS_RANDOM_CENTERS
-#     # K-means segmentation
-#     _, labels, centers = cv2.kmeans(kmeans_input, number_of_clusters, None, criteria,number_of_repetition, flags)
-#     # Adapting the labels
-#     labels = labels.flatten('F')
-#     for x in range(number_of_clusters):
-#         labels[labels == x] = centers[x]
-#     #segmented Image
-#     segmented_image = np.zeros_like(dilasi)
-#     segmented_image[dilasi == foreground_value] = labels
-#     st.image(segmented_image, caption='Segmented Image',use_column_width=True)
+cluster()
