@@ -26,12 +26,11 @@ if allinone:
         img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
         img_2d_scaled = np.uint8(img_2d_scaled)
         hasil = img_2d_scaled
-        st.image(hasil, caption='Gambar Origin')
 
 columns = 6
 rows = 7
 for i in range(1, columns*rows +1):
-    st.image(hasil)
+    st.image(hasil, width=rows, use_column_width=False)
 
 # morphology = st.sidebar.checkbox('Morphology1')
 # if morphology:
