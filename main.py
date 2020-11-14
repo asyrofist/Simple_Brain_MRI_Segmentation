@@ -67,6 +67,9 @@ def dilation(image):
     return dilasi
 
 def cluster():
+    # get the data
+    d = pydicom.read_file('dicom/'+file)
+    file = np.array(d.pixel_array)
     img_2d = file.astype(float)
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
     img_2d_scaled = np.uint8(img_2d_scaled)
