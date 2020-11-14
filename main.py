@@ -28,13 +28,13 @@ if allinone:
         hasil = img_2d_scaled
         
         
-fig=st.Image.figure(figsize=(49, 49))
+fig=st.image.figure(figsize=(49, 49))
 columns = 6
 rows = 7
 for i in range(1, columns*rows +1):
     fig.add_subplot(rows, columns, i)
-    st.Image.imshow(list_b[i])
-st.Image.show()
+    st.image.imshow(list_b[i])
+st.image.show()
 
         
 # morphology = st.sidebar.checkbox('Morphology1')
