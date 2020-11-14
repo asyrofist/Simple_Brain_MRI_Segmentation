@@ -17,7 +17,10 @@ option = st.sidebar.selectbox('Pilih File Dicom?',IMAGE_PATHS)
 st.sidebar.write('You selected:', option)
 st.sidebar.subheader('Parameter')
 iterasi = st.sidebar.slider('Berapa Iterasi?', 0, 10, 4)
-start_ukuran, end_ukuran = st.select_slider('Berapa Ukuran?', options=[0, 1, 2, 3], value=(3, 4, 5, 6))
+start_color, end_color = st.select_slider(
+     'Select a range of color wavelength',
+     options=['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
+     value=('red', 'blue'))
 
 def bukadata(file):    
     # get the data
