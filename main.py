@@ -40,8 +40,8 @@ def threshold(image):
     st.image(binarized, caption='Otsu Image')
     return binarized
 
-bukadata(option)
-threshold(hasil)
+a = bukadata(option)
+threshold(a)
     
 #     # erosion from otsu
 #     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
