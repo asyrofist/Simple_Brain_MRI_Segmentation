@@ -8,7 +8,7 @@ import skimage.segmentation as seg
 from PIL import Image
 
 st.write("""
-# Brain Segmenntation
+# Brain Segmentation
 Berikut ini algoritma yang digunakan untuk Segmentasi Otak
 """)
 
