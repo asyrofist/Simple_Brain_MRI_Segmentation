@@ -30,6 +30,8 @@ if bukadata:
     
 elif otsuthreshold:
     #OTSU THRESHOLDING
+    d = pydicom.read_file('dicom/'+option)
+    file = np.array(d.pixel_array)
     img = file
     img_2d = img.astype(float)
     img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * 255.0
