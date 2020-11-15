@@ -204,6 +204,7 @@ morphology2a = st.sidebar.checkbox('Morphology2\n(Gaussian-Erosion-Dilation-clus
 morphology1b = st.sidebar.checkbox('Improvement Morphology1\n(Otsu-Erosion-Opening-Dilation-cluster)')
 morphology2b = st.sidebar.checkbox('Improvement Morphology2\n(Gaussian-Erosion-Closing-Dilation-cluster)')
 morphology3  = st.sidebar.checkbox('Morphology3\n(Otsu-cluster-Opening-Closing-Dilation)')
+morphology4  = st.sidebar.checkbox('All in One Morphology')
 
 if morphology1a:
     a = bukadata(option)
@@ -252,4 +253,14 @@ elif morphology3:
 #     f = closing(e)
 #     dilation(f)
 
-    
+elif morphology1a:
+    # get the data
+    for num in IMAGE_PATHS:
+         d = pydicom.read_file(num)
+         file = np.array(d.pixel_array)
+         img = file
+         img_2d = img.astype(float)
+         img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground
+         img_2d_scaled = np.uint8(img_2d_scaled)
+         hasil = img_2d_scaled
+         st.image(hasil, caption='Gambar Origin', use_column_width=True)
