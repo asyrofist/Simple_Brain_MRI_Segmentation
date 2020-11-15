@@ -255,20 +255,16 @@ elif morphology3:
 
 elif morphology4:
     # get the data
-    a = bukadata(option)
-    col1, col2, col3= st.beta_columns(len(IMAGE_PATHS))
-    with col1:
-         # get the data
-         d = pydicom.read_file('dicom/Z520')
+    for num in IMAGE_PATHS:
+         d = pydicom.read_file('dicom/'+num)
          file = np.array(d.pixel_array)
          img = file
          img_2d = img.astype(float)
          img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground
          img_2d_scaled = np.uint8(img_2d_scaled)
          hasil = img_2d_scaled
-         st.image(hasil, caption='Gambar Origin', use_column_width=True)
-    with col2:
-          st.image(a)
-    with col3:
-          st.image(a)
-          
+         [col[num] = st.beta_columns(len(IMAGE_PATHS))]
+         with col[num]:
+              st.image(hasil, use_column_width=True)
+#               st.image(hasil, caption='Gambar Origin', use_column_width=True) 
+         
