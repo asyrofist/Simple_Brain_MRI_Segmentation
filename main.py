@@ -253,7 +253,7 @@ elif morphology3:
 #     f = closing(e)
 #     dilation(f)
 
-elif morphology1a:
+elif morphology4:
     # get the data
     for num in IMAGE_PATHS:
          d = pydicom.read_file(num)
