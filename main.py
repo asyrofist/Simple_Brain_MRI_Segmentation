@@ -204,7 +204,6 @@ morphology2a = st.sidebar.checkbox('Morphology2\n(Gaussian-Erosion-Dilation-clus
 morphology1b = st.sidebar.checkbox('Improvement Morphology1\n(Otsu-Erosion-Opening-Dilation-cluster)')
 morphology2b = st.sidebar.checkbox('Improvement Morphology2\n(Gaussian-Erosion-Closing-Dilation-cluster)')
 morphology3  = st.sidebar.checkbox('Morphology3\n(Otsu-cluster-Opening-Closing-Dilation)')
-morphology4  = st.sidebar.checkbox('All in One Morphology')
 
 if morphology1a:
     a = bukadata(option)
@@ -252,6 +251,3 @@ elif morphology3:
 #     e = opening(d)
 #     f = closing(e)
 #     dilation(f)
-
-elif morphology4:
-    a = [bukadata(num) for num in IMAGE_PATHS]
