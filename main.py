@@ -254,8 +254,5 @@ elif morphology3:
 #     dilation(f)
 
 elif morphology4:
-    # get the data
-    col1 = st.beta_columns(len(IMAGE_PATHS))
-    with col1:
-     for num in IMAGE_PATHS:
-          bukadata(num)
+    a = [bukadata(num) for num in IMAGE_PATHS]
+    b = otsuthreshold(a)
