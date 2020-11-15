@@ -263,7 +263,11 @@ elif morphology4:
          img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground
          img_2d_scaled = np.uint8(img_2d_scaled)
          hasil = img_2d_scaled
-         col = st.beta_columns(len(IMAGE_PATHS))
-         with col:
-              st.image(hasil, use_column_width=True)
+         col1, col2, col3 = st.beta_columns(len(IMAGE_PATHS))
+         with col1:
+              st.image(hasil[0], use_column_width=True)
+         with col2:
+              st.image(hasil[1], use_column_width=True)
+         with col3:
+              st.image(hasil[2], use_column_width=True)
          
