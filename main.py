@@ -256,14 +256,14 @@ elif morphology3:
 elif morphology4:
     # get the data
     for num in IMAGE_PATHS:
-         d = pydicom.read_file('dicom/'+num)
-         file = np.array(d.pixel_array)
-         img = file
-         img_2d = img.astype(float)
-         img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground
-         img_2d_scaled = np.uint8(img_2d_scaled)
-         hasil = img_2d_scaled
-         st.write(len(num))
+        d = pydicom.read_file('dicom/'+num)
+        file = np.array(d.pixel_array)
+        img = file
+        img_2d = img.astype(float)
+        img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground
+        img_2d_scaled = np.uint8(img_2d_scaled)
+        hasil = img_2d_scaled
+     st.write(len(num))
 #          col[num] = st.beta_columns(len(num))
 #          with col[num]:
 #           st.header(num)
