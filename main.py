@@ -255,7 +255,7 @@ elif morphology3:
 
 elif morphology4:
     # get the data
-    [bukadata(num) for num for IMAGE_PATHS]
+    [bukadata(num) for num in IMAGE_PATHS]
 #     col1, col2, col3 = st.beta_columns(3)
 #     with col1:
 #           a = bukadata(option)
