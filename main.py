@@ -255,19 +255,11 @@ elif morphology3:
 
 elif morphology4:
     # get the data
-    for num in IMAGE_PATHS:
-         d = pydicom.read_file('dicom/'+num)
-         file = np.array(d.pixel_array)
-         img = file
-         img_2d = img.astype(float)
-         img_2d_scaled = (np.maximum(img_2d,0) / img_2d.max()) * foreground
-         img_2d_scaled = np.uint8(img_2d_scaled)
-         hasil = img_2d_scaled
     col1, col2, col3 = st.beta_columns(3)
     with col1:
-         st.image(hasil[0], use_column_width=True)
+          a = bukadata(option)
     with col2:
-         st.image(hasil[1], use_column_width=True)
+          a = bukadata(option)
     with col3:
-         st.image(hasil[2], use_column_width=True)
+          a = bukadata(option)
          
