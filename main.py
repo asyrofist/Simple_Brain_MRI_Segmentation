@@ -264,4 +264,5 @@ elif morphology4:
         img_2d_scaled = np.uint8(img_2d_scaled)
         hasil = img_2d_scaled
         col = st.beta_columns(len(IMAGE_PATHS))
-        st.image(hasil[col], use_column_width= True)
+        with col:
+          st.image(hasil)
