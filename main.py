@@ -256,7 +256,7 @@ elif morphology3:
 elif morphology4:
     # get the data
     for num in IMAGE_PATHS:
-         d = pydicom.read_file(num)
+         d = pydicom.read_file('dicom/'+num)
          file = np.array(d.pixel_array)
          img = file
          img_2d = img.astype(float)
