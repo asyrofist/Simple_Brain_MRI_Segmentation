@@ -255,4 +255,4 @@ elif morphology3:
 
 elif morphology4:
     a = [bukadata(num) for num in IMAGE_PATHS]
-    b = otsuthreshold(a)
+    b = otsuthreshold([a])
