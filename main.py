@@ -195,31 +195,30 @@ def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):
         elif jml_c>jml_a and jml_c>jml_b:
             segmented_image[segmented_image!=c]=0
 
-    st.image(segmented_image, caption='Divided Image')
+    st.image(segmented_image, caption='Divided Image', use_column_width=True)
     return segmented_image
 
 st.sidebar.subheader("Metode Morphology")
-morphology1a = st.sidebar.checkbox('Morphology1\n(Otsu-Erosion-Dilation-cluster)')
-morphology2a = st.sidebar.checkbox('Morphology2\n(Gaussian-Erosion-Dilation-cluster)')
-morphology1b = st.sidebar.checkbox('Improvement Morphology1\n(Otsu-Erosion-Opening-Dilation-cluster)')
-morphology2b = st.sidebar.checkbox('Improvement Morphology2\n(Gaussian-Erosion-Closing-Dilation-cluster)')
-morphology3  = st.sidebar.checkbox('Morphology3\n(Otsu-cluster-Opening-Closing-Dilation)')
+genre = st.radio("What morphology do you choose?",('Morphology1', 'Morphology2', 'Improvement Morpholog1', 'Improvement Morphologi2', 'Morphology3'))
 
-if morphology1a:
+if genre == 'Morphology1':
+    st.subheader(genre)
     a = bukadata(option)
     b = otsuthreshold(a)
     c = erosion(b)
     d = dilation(c)
     cluster(a, d, foreground)
 
-elif morphology2a:
+elif genre == 'Morphology2':
+    st.subheader(genre)
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
     d = dilation(c)
     cluster(a, d, foreground)
     
-elif morphology1b:
+elif genre == 'Improvement Morpholog1':
+    st.subheader(genre)
     a = bukadata(option)
     b = otsuthreshold(a)
     c = erosion(b)
@@ -227,23 +226,17 @@ elif morphology1b:
     e = dilation(d)
     cluster(a, e, foreground)
     
-elif morphology2b:
+elif genre == 'Improvement Morphologi2':
+    st.subheader(genre)
     a = bukadata(option)
     b = gaussianthreshold(a)
     c = erosion(b)
     d = closing(c)
     e = dilation(d)
     cluster(a, e, foreground)
-    
-elif morphology2b:
-    a = bukadata(option)
-    b = gaussianthreshold(a)
-    c = erosion(b)
-    d = closing(c)
-    e = dilation(d)
-    cluster(a, e, foreground)
-
-elif morphology3:
+  
+elif genre -- 'Morphology3':
+    st.subheader(genre)
     a = bukadata(option)
     b = otsuthreshold(a)
     c = cluster(a, b, foreground)
