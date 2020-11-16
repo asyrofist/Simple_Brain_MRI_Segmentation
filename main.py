@@ -94,7 +94,7 @@ def opening(image):
 
 def closing(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
-    closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= itrasi)
+    closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= iterasi)
     foreground_value = foreground
     mask_closing = np.uint8(closing >= foreground_value)
     labels, stats = cv2.connectedComponentsWithStats(mask_closing, ukuran)[start_ukuran:end_ukuran]
