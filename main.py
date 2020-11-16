@@ -199,7 +199,7 @@ def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):
     return segmented_image
 
 st.sidebar.subheader("Metode Morphology")
-genre = st.radio("What morphology do you choose?",('Morphology1', 'Morphology2', 'Improvement Morpholog1', 'Improvement Morphologi2', 'Morphology3'))
+genre = st.sidebar.radio("What morphology do you choose?",('Morphology1', 'Morphology2', 'Improvement Morpholog1', 'Improvement Morphologi2', 'Morphology3'))
 
 if genre == 'Morphology1':
     st.subheader(genre)
