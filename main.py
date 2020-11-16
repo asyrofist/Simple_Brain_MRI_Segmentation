@@ -235,7 +235,7 @@ elif genre == 'Improvement Morphologi2':
     e = dilation(d)
     cluster(a, e, foreground)
   
-elif genre -- 'Morphology3':
+elif genre == 'Morphology3':
     st.subheader(genre)
     a = bukadata(option)
     b = otsuthreshold(a)
