@@ -9,6 +9,7 @@ from PIL import Image
 
 st.set_page_config(
      page_title="Brain Segmentation",
+     page_icon="https://www.pngfind.com/pngs/m/327-3271821_brain-png-image-brain-side-view-vector-transparent.png",
      initial_sidebar_state="expanded",
      )
 
