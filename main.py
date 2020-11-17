@@ -29,7 +29,7 @@ nilai_iterasi = st.sidebar.slider('Berapa Iterasi cluster?', 6, 100, 50)
 nilai_cluster = st.sidebar.slider('Berapa Cluster?', 3, 10, 4)
 nilai_repetition = st.sidebar.slider('Berapa Repetition?', 9, 98, 10)
 
-
+@st.cache
 def bukadata(file):    
     # get the data
     d = pydicom.read_file('dicom/'+file)
@@ -42,6 +42,7 @@ def bukadata(file):
     st.image(hasil, caption='Gambar Origin', use_column_width=True)
     return hasil
 
+@st.cache
 def otsuthreshold(image):
     #OTSU THRESHOLDING
     _,binarized = cv2.threshold(image, 0, foreground, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
@@ -54,6 +55,7 @@ def otsuthreshold(image):
     st.image(binarized, caption='Otsu Image', use_column_width=True)
     return binarized
 
+@st.cache
 def gaussianthreshold(image):
     gaussian = cv2.adaptiveThreshold(image, foreground, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
                 cv2.THRESH_BINARY,nilai_threshold, 1)
@@ -66,7 +68,8 @@ def gaussianthreshold(image):
     gaussian[labels == largest_label] = foreground_value
     st.image(gaussian, caption='Gaussian Image', use_column_width=True)
     return gaussian
-    
+
+@st.cache    
 def erosion(image):
     # erosion from otsu
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
@@ -80,6 +83,7 @@ def erosion(image):
     st.image(erosion, caption='Erosion Image', use_column_width=True)
     return erosion
 
+@st.cache
 def opening(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel, iterations= iterasi)
@@ -92,6 +96,7 @@ def opening(image):
     st.image(opening, caption='Opening Image', use_column_width=True)
     return opening
 
+@st.cache
 def closing(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
     closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations= iterasi)
@@ -104,6 +109,7 @@ def closing(image):
     st.image(close, caption='Closing Image', use_column_width=True)
     return close
 
+@st.cache
 def dilation(image):
     # dilation from opening
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(end_ukuran,end_ukuran))
@@ -117,6 +123,7 @@ def dilation(image):
     st.image(dilasi, caption='Dilation Image', use_column_width=True)
     return dilasi
 
+@st.cache
 def cluster(image, dilasi, foreground_value):
     #Skull Stripping
     skull_stripped_image = cv2.bitwise_and(image, image, mask = dilasi)
@@ -144,6 +151,7 @@ def cluster(image, dilasi, foreground_value):
     st.image(segmented_image, caption='Segmented Image', use_column_width=True)
     return segmented_image
 
+@st.cache
 def divided(image, a=0, b=0, c=0, jml_a=0, jml_b=0, jml_c=0, jml_d=0):  
     segmented_image = image    
     for x in range(256):
