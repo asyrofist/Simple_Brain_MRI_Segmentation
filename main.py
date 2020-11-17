@@ -7,6 +7,12 @@ import matplotlib.pyplot as plt
 import skimage.segmentation as seg
 from PIL import Image
 
+st.set_page_config(
+     page_title="Brain Segmentation",
+     layout="wide",
+     initial_sidebar_state="expanded",
+     )
+
 st.write("""
 # Brain Segmentation
 Berikut ini algoritma yang digunakan untuk Segmentasi Otak
