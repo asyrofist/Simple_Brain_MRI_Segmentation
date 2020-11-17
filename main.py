@@ -9,7 +9,6 @@ from PIL import Image
 
 st.set_page_config(
      page_title="Brain Segmentation",
-     layout="wide",
      initial_sidebar_state="expanded",
      )
 
