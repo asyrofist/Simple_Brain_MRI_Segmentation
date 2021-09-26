@@ -1,3 +1,5 @@
+![image](https://visitor-badge.laobi.icu/badge?page_id=asyrofist/Brain_segmentation)
+
 # Brain Segmentation
 Author  | [Rakha Asyrofi](https://scholar.google.com/citations?user=WN9T5UUAAAAJ&hl=id&oi=ao)
  -------|-----------
