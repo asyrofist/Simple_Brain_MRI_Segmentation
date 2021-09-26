@@ -1,6 +1,7 @@
 ![PyPI - Python Version](https://img.shields.io/badge/python-3.7.0-blue.svg)
 [![PyPI](https://img.shields.io/badge/pypi-v0.0.1-blue.svg)](https://pypi.org/project/brain-segmen/)
 ![image](https://visitor-badge.laobi.icu/badge?page_id=asyrofist/Brain_segmentation)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
 # Brain Segmentation
 Author  | [Rakha Asyrofi](https://scholar.google.com/citations?user=WN9T5UUAAAAJ&hl=id&oi=ao)
