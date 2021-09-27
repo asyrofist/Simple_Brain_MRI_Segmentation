@@ -3,6 +3,7 @@
 ![image](https://visitor-badge.laobi.icu/badge?page_id=asyrofist/Brain_segmentation)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 [![Build Status](https://app.travis-ci.com/asyrofist/Brain-Segmentation.svg?branch=master)](https://app.travis-ci.com/asyrofist/Brain-Segmentation)
+[![Paper](http://img.shields.io/badge/Paper-PDF-red.svg)](https://ieeexplore.ieee.org/document/9234262)
 
 # Brain Segmentation
 Author  | [Rakha Asyrofi](https://scholar.google.com/citations?user=WN9T5UUAAAAJ&hl=id&oi=ao)
