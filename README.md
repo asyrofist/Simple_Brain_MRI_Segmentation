@@ -1,5 +1,5 @@
 ![PyPI - Python Version](https://img.shields.io/badge/python-3.7.0-blue.svg)
-[![PyPI](https://img.shields.io/badge/pypi-v0.0.1-blue.svg)](https://pypi.org/project/brain-segmen/)
+[![PyPI](https://img.shields.io/pypi/v/brain-segmen.svg)](https://pypi.org/project/brain-segmen/)
 ![image](https://visitor-badge.laobi.icu/badge?page_id=asyrofist/Brain_segmentation)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 [![Build Status](https://app.travis-ci.com/asyrofist/Brain-Segmentation.svg?branch=master)](https://app.travis-ci.com/asyrofist/Brain-Segmentation)
