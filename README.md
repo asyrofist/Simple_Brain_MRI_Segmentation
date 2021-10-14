@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/216203437.svg)](https://zenodo.org/badge/latestdoi/216203437)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5559181.svg)](https://doi.org/10.5281/zenodo.5559181)
 ![PyPI - Python Version](https://img.shields.io/badge/python-3.7.0-blue.svg)
 [![PyPI](https://img.shields.io/pypi/v/brain-segmen.svg)](https://pypi.org/project/brain-segmen/)
 ![image](https://visitor-badge.laobi.icu/badge?page_id=asyrofist/Brain_segmentation)
