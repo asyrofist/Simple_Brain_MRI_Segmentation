@@ -6,6 +6,8 @@
 [![Documentation Status](https://readthedocs.org/projects/brain-segmen/badge/?version=latest)](https://brain-segmen.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://app.travis-ci.com/asyrofist/Brain-Segmentation.svg?branch=master)](https://app.travis-ci.com/asyrofist/Brain-Segmentation)
 [![Paper](http://img.shields.io/badge/Paper-PDF-red.svg)](https://ieeexplore.ieee.org/document/9234262)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4a3695be4535bae295ad/maintainability)](https://codeclimate.com/github/asyrofist/brain_segmen/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4a3695be4535bae295ad/test_coverage)](https://codeclimate.com/github/asyrofist/brain_segmen/test_coverage)
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://segbrain.herokuapp.com/)
 
 # Brain Segmentation
