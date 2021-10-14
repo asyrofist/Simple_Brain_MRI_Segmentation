@@ -3,6 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/v/brain-segmen.svg)](https://pypi.org/project/brain-segmen/)
 ![image](https://visitor-badge.laobi.icu/badge?page_id=asyrofist/Brain_segmentation)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
+[![Documentation Status](https://readthedocs.org/projects/brain-segmen/badge/?version=latest)](https://brain-segmen.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://app.travis-ci.com/asyrofist/Brain-Segmentation.svg?branch=master)](https://app.travis-ci.com/asyrofist/Brain-Segmentation)
 [![Paper](http://img.shields.io/badge/Paper-PDF-red.svg)](https://ieeexplore.ieee.org/document/9234262)
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://segbrain.herokuapp.com/)
