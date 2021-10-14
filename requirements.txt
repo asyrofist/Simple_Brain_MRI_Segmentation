@@ -5,3 +5,4 @@ matplotlib
 scikit-image
 Pillow
 streamlit
+myst_parser
