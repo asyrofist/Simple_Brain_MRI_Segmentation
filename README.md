@@ -9,6 +9,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4a3695be4535bae295ad/maintainability)](https://codeclimate.com/github/asyrofist/brain_segmen/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4a3695be4535bae295ad/test_coverage)](https://codeclimate.com/github/asyrofist/brain_segmen/test_coverage)
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://segbrain.herokuapp.com/)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 # Brain Segmentation
 Author  | [Rakha Asyrofi](https://scholar.google.com/citations?user=WN9T5UUAAAAJ&hl=id&oi=ao)
