@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="brain_segmen",
-    version="0.0.1",
+    version="0.0.2",
     author="Asyrofi (Rakha Asyrofi)",
     author_email="rakhasyrofist@gmail.com",
     description="Berikut ini adalah deskripsi singkat bagaimana segmentasi otak dibuat",
